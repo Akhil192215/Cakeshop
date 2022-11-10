@@ -1,0 +1,165 @@
+
+    <div class="col-8 offset-3 ">
+        <div class="card recent-sales overflow-auto">
+           <div style="margin-left:850px;padding-top:100px ;">
+             <button onclick="editCoupon()" class="btn btn-success mx-auto"> Add new <i class="icon-plus"></i></button>
+           </div>
+            <div class="card-body">`
+                <h5 class="card-title mt-5">Coupon Management<span>| </span></h5>
+
+                <table class="table table-borderless datatable">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>coupon</th>
+                            <th>discount rate</th>
+                            <th>Ex. Date</th>
+                            <th> delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each coupon}}
+                        <tr id="{{this._id}}">
+                            <td>
+                                <p class="fw-bold mb-1">{{@index}}</p>
+                                <!-- <p class="text-muted mb-0">IT department</p> -->
+                            </td>
+
+                            <td>
+                                <div class="d-flex align-items-center">
+
+                                    <div class="ms-3">
+                                        <p class="fw-bold mb-1">{{this.coupon}}</p>
+                                        <!-- <p class="text-muted mb-0">john.doe@gmail.com</p> -->
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-flex align-items-center">
+
+                                    <div class="ms-3">
+                                        <p class="fw-bold mb-1">{{this.discount}}%</p>
+                                        <!-- <p class="text-muted mb-0">john.doe@gmail.com</p> -->
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-flex align-items-center">
+
+                                    <div class="ms-3">
+                                        <p class="fw-bold mb-1">{{this.date}}</p>
+                                        <!-- <p class="text-muted mb-0">john.doe@gmail.com</p> -->
+                                    </div>
+                                </div>
+                            </td>
+
+
+
+                            <td><button onclick="deleteCoupon('{{this._id}}')" class="btn btn-outline-danger"><i
+                                        class="fa fa-trash-o"></i></button>
+                            </td>
+                            {{!-- <td><button onclick="deleteCoupon('{{this._id}}')" class="btn btn-outline-primary"><i
+                                        class="fa fa-pencil"></i></button>
+                            </td> --}}
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function deleteCoupon(Id) {
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false
+        })
+        swalWithBootstrapButtons.fire({
+            title: 'Are you sure?',
+
+            text: "remove from cart!",
+
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: 'POST',
+                    url: '/admin/delete-coupon',
+                    data: {
+                        couponId: Id,
+                    },
+                    success: function (response) {
+                        if (response) {
+                            document.getElementById(Id).style.display = 'none'
+                        }
+                    }
+                })
+            } else if (
+                /* Read more about handling dismissals below */
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons.fire(
+                    'Cancelled',
+                    'Your imaginary file is safe :)',
+                    'error'
+                )
+            }
+        })
+    }
+
+</script>
+<script>
+
+    function editCoupon(Id) {
+        (async () => {
+            const { value: formValues } = await Swal.fire({
+                title: 'Multiple inputs',
+                html:
+                    '<input id="swal-input1" type="text" placeholder="enter coupon name" class="swal2-input">' +
+                    '<input id="swal-input2" type="number" placeholder="enter discount %" class="swal2-input">' +
+                    '<input id="swal-input3" type="date" class="swal2-input">',
+                focusConfirm: false,
+                preConfirm: () => {
+                    return [
+                        document.getElementById('swal-input1').value,
+                        document.getElementById('swal-input2').value,
+                        document.getElementById('swal-input3').value
+                    ]
+                }
+            })
+
+            if (formValues) {
+                let coupon = []
+                coupon = formValues
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/admin/add-coupon',
+                    data: {
+                        coupon: coupon[0],
+                        discount: coupon[1],
+                        date: coupon[2]
+                    },
+                    success: function (response) {
+                        location.reload()
+                    }
+                })
+
+
+
+            }
+
+        })()
+    }  
+</script>

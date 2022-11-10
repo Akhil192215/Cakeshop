@@ -1,0 +1,59 @@
+<link href="/admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<main id="main" class="main">
+
+    <div class="container">
+        <div class="row">
+
+            <div class="">
+                <div class="card recent-sales overflow-auto">
+                    <div class="card-body">
+                        <h5 class="card-title">Orders <span>| Today</span></h5>
+
+                        <table class="table table-borderless datatable">
+                            <thead>
+                                <tr>
+                                    <th>Time</th>
+                                    <th>Address</th>
+                                    <th>Total</th>
+                                    <th> Method</th>
+                                    <th>Option</th>
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each orders}}
+                                <tr>
+                                    <td>{{this.date}}</td>
+                                    <td>{{this.address.address}}
+                                        {{this.address.phone}},{{this.address.pincode}},
+                                        {{this.address.email}}</td>
+
+
+                                    <td>{{this.totalMoney}}</td>
+
+                                    <td>{{this.status}}</td>
+                                    <td><a href="/admin/order-received/{{this._id}}" class="view"><i
+                                                class="icon-eye"></i></a>
+                                    </td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            {{#times pagination}}
+            <li class="page-item"><a class="page-link" href="?pagination={{this}}">{{this}}</a></li>
+            {{/times}}
+        </ul>
+    </nav>
+    </div>
+
+</main>

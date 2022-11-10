@@ -1,0 +1,60 @@
+<div style="margin-top:100px ;">
+    <div class="col-8 offset-3 ">
+        <div class="card recent-sales overflow-auto">
+            <div class="card-body">
+                <h5 class="card-title">User Management <span> </span></h5>
+
+                <table class="table table-borderless datatable">
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Address</th>
+                            <th>Total</th>
+                            <th> Method</th>
+                            <th>Option</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each users}}
+                        <tr>
+                            <td>
+                                <p class="fw-bold mb-1">{{@index}}</p>
+                                <!-- <p class="text-muted mb-0">IT department</p> -->
+                            </td>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div class="ms-3">
+                                        <p class="fw-bold mb-1">{{this.name}}</p>
+                                        <!-- <p class="text-muted mb-0">john.doe@gmail.com</p> -->
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="fw-bold mb-1">{{this.email}}</p>
+                                <!-- <p class="text-muted mb-0">IT department</p> -->
+                            </td>
+                            <td>
+                                <p class="fw-bold mb-1">+91 {{this.phone}}</p>
+                                <!-- <p class="text-muted mb-0">IT department</p> -->
+                            </td>
+                            {{#if this.blockStatus}}
+                            <td>
+                                <a href="/admin/unblock-user/{{this._id}}" class="btn btn-primary">Unblock</a>
+                            </td>
+                            {{else}}
+                            <td>
+                                <a href="/admin/block-user/{{this._id}}" class="btn btn-danger">Block</a>
+                            </td>
+                            {{/if}}
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+</div>

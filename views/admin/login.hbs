@@ -1,0 +1,103 @@
+<style>
+    body {
+        background-color: #FEF5EF;
+    }
+
+    .customer-login {
+        margin-top: 200px;
+    }
+
+    .account_form form {
+        border: 1px solid #24262b57;
+        padding: 23px 20px 29px;
+        border-radius: 5px;
+    }
+
+    .default-form-box input[type=email] {
+        border: 1px solid #24262b57;
+        border-radius: 3px;
+        background: 0 0;
+        height: 40px;
+        width: 100%;
+        padding: 0 20px;
+        color: #777
+    }
+
+
+    .default-form-box input[type=password] {
+        border: 1px solid #24262b57;
+        border-radius: 3px;
+        background: 0 0;
+        height: 40px;
+        width: 100%;
+        padding: 0 20px;
+        color: #777
+    }
+</style>
+
+<body>
+    <!-- ...:::: Start Customer Login Section :::... -->
+    <div class="customer-login">
+        <div class="container">
+            <div class="row">
+                <!--login area start-->
+                <div class="col-md-6 offset-md-3">
+                    <div class="account_form" data-aos="fade-up" data-aos-delay="0">
+                        <h3>Admin-login</h3>
+                        <form action="/admin/login" method="POST">
+                            <p>{{message}}</p>
+                            <div class="default-form-box">
+                                <label>Email address <span>*</span></label>
+                                <input type="email" value="admin@gmail.com" name='email' id="email" onkeyup="emailValidate()">
+                                <span style="color: rgb(249, 184, 184) ;" id='emailError'></span>
+                            </div>
+                            <div class="default-form-box">
+                                <label>Passwords <span>*</span></label>
+                                <input value="1234" type="password" name='psw' id="psw" onkeyup="passwordValidate()">
+                                <span style="color: rgb(249, 184, 184) ;" id='pswError'></span>
+                            </div>
+                            <div class="login_submit">
+                                <button class="btn btn-md btn-black-default-hover mb-4" type="submit">login</button>
+                                <a href="/signup">Create new account?</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    var emailError = document.getElementById('emailError');
+    var passwordError = document.getElementById('pswError');
+
+
+    function emailValidate() {
+        var email = document.getElementById('email').value;
+        if (email.length == 0) {
+            emailError.innerHTML = "email is required";
+            return false;
+        }
+        if (!email.match(/^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/)) {
+            emailError.innerHTML = "email is  invalid";
+            return false;
+        }
+        emailError.innerHTML = "";
+        return true;
+    }
+    function passwordValidate() {
+        var password = document.getElementById('psw').value;
+        if (password.length <= 3) {
+            passwordError.innerHTML = "password is too short";
+            return false;
+        }
+        passwordError.innerHTML = "";
+        return true
+    }
+</script>
+<!-- Use the minified version files listed below for better performance and remove the files listed above -->
+<script src="/js/vendor/vendor.min.js"></script>
+<script src="/js/plugins/plugins.min.js"></script>
+
+<!-- Main JS -->
+<script src="/js/main.js"></script>

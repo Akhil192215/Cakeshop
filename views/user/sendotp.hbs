@@ -1,0 +1,79 @@
+<style>
+    body {
+        background-color: #FEF5EF;
+    }
+
+    .customer-signup {
+        margin-top: 200px;
+    }
+
+    .default-form-box input[type=text] {
+        border: 1px solid #24262b57;
+        border-radius: 3px;
+        background: 0 0;
+        height: 40px;
+        width: 100%;
+        padding: 0 20px;
+        color: #777
+    }
+
+    .default-form-box input[type=email] {
+        border: 1px solid #24262b57;
+        border-radius: 3px;
+        background: 0 0;
+        height: 40px;
+        width: 100%;
+        padding: 0 20px;
+        color: #777
+    }
+
+    .default-form-box input[type=password] {
+        border: 1px solid #24262b57;
+        border-radius: 3px;
+        background: 0 0;
+        height: 40px;
+        width: 100%;
+        padding: 0 20px;
+        color: #777
+    }
+
+    .default-form-box input[type=phone] {
+        border: 1px solid #24262b57;
+        border-radius: 3px;
+        background: 0 0;
+        height: 40px;
+        width: 100%;
+        padding: 0 20px;
+        color: #777
+    }
+</style>
+
+<body>
+    <div class="customer-signup"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="account_form register" data-aos="fade-up" data-aos-delay="200">
+                    <h3>Register</h3>
+                    <form method="post" action="/signup">
+
+                        <div class="default-form-box">
+                            <label>Phone number <span>*</span></label>
+                            <input type="phone" value="91" name='phone' id="phone" onkeyup="phoneValidate()" required>
+                            <span style="color: rgb(249, 184, 184) ;" id='phoneError'></span>
+                        </div>
+                        <div class="login_submit">
+                            <button class="btn btn-md btn-black-default-hover" type="submit">Register</button>
+                            <a href="/login">Login</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+
+
+</body>

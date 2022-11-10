@@ -1,0 +1,164 @@
+<style>
+    body {
+        background-color: #FEF5EF;
+    }
+
+    .customer-signup {
+        margin-top: 200px;
+    }
+
+    .default-form-box input[type=text] {
+        border: 1px solid #24262b57;
+        border-radius: 3px;
+        background: 0 0;
+        height: 40px;
+        width: 100%;
+        padding: 0 20px;
+        color: #777
+    }
+
+    .default-form-box input[type=email] {
+        border: 1px solid #24262b57;
+        border-radius: 3px;
+        background: 0 0;
+        height: 40px;
+        width: 100%;
+        padding: 0 20px;
+        color: #777
+    }
+
+    .default-form-box input[type=password] {
+        border: 1px solid #24262b57;
+        border-radius: 3px;
+        background: 0 0;
+        height: 40px;
+        width: 100%;
+        padding: 0 20px;
+        color: #777
+    }
+
+    .default-form-box input[type=phone] {
+        border: 1px solid #24262b57;
+        border-radius: 3px;
+        background: 0 0;
+        height: 40px;
+        width: 100%;
+        padding: 0 20px;
+        color: #777
+    }
+</style>
+
+<body>
+    <div class="customer-signup"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="account_form register" data-aos="fade-up" data-aos-delay="200">
+                    <h3>Register</h3>
+                    <form method="post" action="/signup">
+                        <div class="default-form-box">
+                            <p style="color: rgb(254, 108, 108)">{{message}}</p>
+                            <label>Name <span>*</span></label>
+                            <input type="text" name='name' id="name" required onkeyup=nameValidate()>
+                            <span style="color: rgb(249, 184, 184) ;" id='nameError'></span>
+                        </div>
+                        <div class="default-form-box">
+                            <label>Email address <span>*</span></label>
+                            <input type="email" name='email' id="email" onkeyup="emailValidate()" required>
+                            <span style="color: rgb(249, 184, 184) ;" id='emailError'></span>
+                        </div>
+                        <div class="default-form-box">
+                            <label>Password <span>*</span></label>
+                            <input type="password" name='psw' id="psw" onkeyup="passwordValidate()" required>
+                            <span style="color: rgb(249, 184, 184) ;" id='pswError'></span>
+                        </div>
+                        <div class="default-form-box">
+                            <label> Repeat Password <span>*</span></label>
+                            <input type="password" name='repsw' id="repsw" onkeyup="passwordValidate()" required>
+                            <span style="color: rgb(249, 184, 184) ;" id='pswError'></span>
+                            <span style="color: rgb(249, 184, 184) ;">{{error}}</span>
+                        </div>
+                        <div class="default-form-box">
+                            <label>Phone number <span>*</span></label>
+                            <input type="phone" value="91" name='phone' id="phone" onkeyup="phoneValidate()" required>
+                            <span style="color: rgb(249, 184, 184) ;" id='phoneError'></span>
+                        </div>
+                        <div class="login_submit">
+                            <button class="btn btn-md btn-black-default-hover" type="submit">Register</button>
+                            <a href="/login">Login</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+
+
+<script>
+    var nameError = document.getElementById('nameError');
+    var emailError = document.getElementById('emailError');
+    var passwordError = document.getElementById('pswError');
+    var phoneError = document.getElementById('phoneError');
+    function nameValidate() {
+        var name = document.getElementById('name').value;
+        if (name.length <= 3) {
+            nameError.innerHTML = "name is too short";
+            return false;
+        }
+        if (!name.match(/^[A-Za-z ]+$/)) {
+            nameError.innerHTML = "name is invalid";
+            return false;
+        }
+        nameError.innerHTML = "";
+        return true;
+    }
+
+
+    function emailValidate() {
+        var email = document.getElementById('email').value;
+        if (email.length == 0) {
+            emailError.innerHTML = "email is required";
+            return false;
+        }
+        if (!email.match(/^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/)) {
+            emailError.innerHTML = "email is  invalid";
+            return false;
+        }
+        emailError.innerHTML = "";
+        return true;
+    }
+    function passwordValidate() {
+        var password = document.getElementById('psw').value;
+        if (password.length <= 3) {
+            passwordError.innerHTML = "password is too short";
+            return false;
+        }
+        passwordError.innerHTML = "";
+        return true
+    }
+    function phoneValidate() {
+        var phone = document.getElementById('phone').value;
+        if (phone.length <= 10) {
+            phoneError.innerHTML = "invalid phone number";
+            return false;
+        }
+        phoneError.innerHTML = "";
+        return true;
+    }
+
+    function validator() {
+        if (emailValidate && nameValidate && passwordValidate && phoneValidate) {
+            console.log('hello world')
+        }
+    }
+</script>
+<!-- Use the minified version files listed below for better performance and remove the files listed above -->
+<script src="/js/vendor/vendor.min.js"></script>
+<script src="/js/plugins/plugins.min.js"></script>
+
+<!-- Main JS -->
+<script src="/js/main.js"></script>
+</body>

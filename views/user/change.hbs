@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="row">
+        <h2>Change Password</h2>
+        <form action="/pswChange" method="post">
+            <div class="default-form-box">
+                <label>Password <span>*</span></label>
+                <input type="password" name='psw' id="psw" onkeyup="passwordValidate()" required>
+                <span style="color: rgb(249, 184, 184) ;" id='pswError'></span>
+            </div>
+            <div class="default-form-box">
+                <label> Repeat Password <span>*</span></label>
+                <input type="password" name='repsw' id="repsw" onkeyup="passwordValidate()" required>
+                <span style="color: rgb(249, 184, 184) ;" id='pswError'></span>
+                <span style="color: rgb(249, 184, 184) ;">{{error}}</span>
+            </div>
+            <div>
+                <button type="submit">Change</button>
+            </div>
+        </form>
+    </div>
+</div>

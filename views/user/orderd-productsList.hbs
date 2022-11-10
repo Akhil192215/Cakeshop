@@ -1,0 +1,154 @@
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<div class="container">
+    <div class="row">
+        <h4>Orders</h4>
+        {{!-- <div class="table_page table-responsive"> --}}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Cake</th>
+                        <th>Cake Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Order Status</th>
+                        <th>Payment Status</th>
+                        <th>Option</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each products}}
+                    <tr>
+                        <td>
+                            <img src="/uploads/{{this.product.image.[0]}}" class="rounded-circle" alt=""
+                                style="width: 45px; height: 45px" />
+                        </td>
+                        <td>{{this.product.name}}
+                            <p>{{this.product.category}} </p>
+                        </td>
+                        <td>{{this.quantity}}</td>
+                        <td>{{this.product.price}}</td>
+                        <td>{{this.status}}</td>
+                        <td>{{this.paymentStatus}}</td>
+                        {{#ifEquals this.status 'Deliverd' }}
+                        <td>
+                            <button id="{{this.product._id}}"
+                                onclick="returnOrder('{{this._id}}','{{this.product._id}}','{{this.product.name}}', this)"
+                                class="btn btn-success">Return</button>
+
+                        </td>
+                        {{else}}
+                        <td><button id="{{this.product._id}}" {{#ifEquals this.status 'Cancelled'
+                                }}disabled{{/ifEquals}}
+                                onclick="cancelOrder('{{this._id}}','{{this.product._id}}','{{this.product.name}}', this)"
+                                class="btn btn-danger">Cancel</button>
+                        </td>
+                        {{/ifEquals}}
+
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+    function cancelOrder(order, product, productName, btn) {
+        console.log(order, product)
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false
+        })
+        swalWithBootstrapButtons.fire({
+            title: 'Are you sure?',
+            text: "Cancel" + ' ' + productName,
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: 'POST',
+                    url: '/cancel-pro',
+                    data: {
+                        orderId: order,
+                        proId: product
+                    },
+                    success: function (response) {
+                        if (response) {
+                            $(`#${product}`).attr("disabled", true);
+                               location.reload()
+                            swalWithBootstrapButtons.fire(
+                                'Success',
+                                'request send',
+                            )
+                        }
+                    }
+                })
+            } else if (
+                /* Read more about handling dismissals below */
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons.fire(
+                    'Cancelled',
+                    'request cancelled',
+                )
+            }
+        })
+
+    }
+
+</script>
+
+<script>
+    function returnOrder(order) {   
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false
+        })
+        swalWithBootstrapButtons.fire({
+            title: 'Are you sure?',
+            text: "Cancel",
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: 'POST',
+                    url: '/return-pro',
+                    data: {
+                        orderId: order,
+
+                    },
+                    success: function (response) {
+                        if (response) {
+                            $(`#${product}`).attr("disabled", true);
+                            location.reload()
+                            swalWithBootstrapButtons.fire(
+                                'Success',
+                                'request send',
+                            )
+                        }
+                    }
+                })
+            } else if (
+                /* Read more about handling dismissals below */
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons.fire(
+                    'Cancelled',
+                    'request cancelled',
+                )
+            }
+        })
+    }
+</script>

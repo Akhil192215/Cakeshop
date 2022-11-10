@@ -1,0 +1,73 @@
+<link href="/admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+<div style="margin-top:100px ;">
+    <div class="col-8 offset-3 ">
+        <div class="card recent-sales overflow-auto">
+
+            <div class="card-body">
+                <h5 class="card-title mt-5">View Products<span>| </span></h5>
+
+                <table class="table table-borderless datatable">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Image</th>
+                            <th>Cake name</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each products}}
+                        <tr>
+                            <td>
+                                <p class="fw-bold mb-1">{{@index}}</p>
+                                <!-- <p class="text-muted mb-0">IT department</p> -->
+                            </td>
+                            <td>
+                                <img src="/uploads/{{this.image.[0]}}" class="rounded-circle" alt=""
+                                    style="width: 45px; height: 45px" />
+                            </td>
+                            <td>
+                                <div class="d-flex align-items-center">
+
+                                    <div class="ms-3">
+                                        <p class="fw-bold mb-1">{{this.name}}</p>
+                                        <!-- <p class="text-muted mb-0">john.doe@gmail.com</p> -->
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="fw-bold mb-1">{{this.category}}</p>
+                                <!-- <p class="text-muted mb-0">IT department</p> -->
+                            </td>
+                            <td>
+                                <p class="fw-bold mb-1">{{this.price}}</p>
+                                <!-- <p class="text-muted mb-0">IT department</p> -->
+                            </td>
+                            <td>
+                            </td>
+                            <td><a href="/admin/edit-product/{{this._id}}" class="btn btn-success"><i
+                                        class="icon-pencil"></i></a>
+                                <a href="/admin/delete-product/{{this._id}}" class="btn btn-danger"
+                                    onclick=" return confirm('Continue deleting ?')">
+                                    <i class="fa fa-trash-o"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        {{#times pagination}}
+                        <li class="page-item"><a class="page-link" href="?page={{this}}">{{this}}</a></li>
+                        {{/times}}
+                    </ul>
+                </nav>
+            </div>
+
+        </div>
+    </div>
+</div>

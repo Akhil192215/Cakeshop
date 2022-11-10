@@ -1,0 +1,80 @@
+<div class="container">
+    <div class="row">
+        <div class="card-body">
+            <h5 class="card-title">Recent Sales <span>| Today</span></h5>
+            <form method="post" action="/admin/change-status">
+                <table class="table table-borderless datatable">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Product</th>
+                            <th>Status</th>
+                            <th> Quantity</th>
+                            <th>Price</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each products}}
+
+                        <tr>
+                            <td>
+                                <img src="/uploads/{{this.product.image.[0]}}"  class="rounded-circle" alt=""
+                                    style="width: 45px; height: 45px" />
+                            </td>
+                            <td>{{this.product.name}}
+                                <p>{{this.product.category}} </p>
+                            </td>
+                            <td>
+                                <select id="selectBox" onchange="changeFunc(this)">
+                                    <option value="Placed-{{this._id}}-{{this.product._id}}" {{#ifEquals
+                                        this.status 'Placed' }} selected {{/ifEquals}}>Placed</option>
+
+                                    <option value="Prepairing-{{this._id}}-{{this.product._id}}" {{#ifEquals
+                                        this.status 'Prepairing' }} selected{{/ifEquals}}>Prepairing
+                                    </option>
+                                    <option value="Out for delivery-{{this._id}}-{{this.product._id}}" {{#ifEquals
+                                        this.status 'Out for delivery' }} selected{{/ifEquals}}>Out for delivery
+                                    </option>
+                                    <option value="Deliverd-{{this._id}}-{{this.product._id}}" {{#ifEquals
+                                        this.status 'Deliverd' }} selected{{/ifEquals}}>Deliverd
+                                    </option>
+                                    <option value="Deliverd-{{this._id}}-{{this.product._id}}" {{#ifEquals
+                                        this.status 'Cancelled' }} selected{{/ifEquals}}>Cancelled
+                                    </option>
+                                </select>
+                                <br><br>
+
+                            </td>
+                            <td>{{this.quantity}}</td>
+                            <td>{{this.product.price}}</td>
+                        </tr>
+                        {{/each}}
+            </form>
+            </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    function changeFunc(dataa) {
+        const [status, orderId, productId] = dataa.value.split('-')
+        $.ajax({
+            type: 'POST',
+            url: '/admin/change-status',
+            data: {
+                status,
+                orderId,
+                productId
+            },
+            success: (response) => {
+                location.reload()
+            }
+        })
+    }
+
+</script>

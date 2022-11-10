@@ -1,0 +1,682 @@
+<style>
+    .colored-toast.swal2-icon-success {
+        background-color: #fff6f1 !important;
+    }
+</style>
+
+<body>
+
+
+    <!-- Offcanvas Overlay -->
+    <div class="offcanvas-overlay"></div>
+
+    <!-- Start Hero Slider Section-->
+    <div class="hero-slider-section">
+        <!-- Slider main container -->
+        <div class="hero-slider-active swiper-container">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+                <!-- Start Hero Single Slider Item -->
+                <div class="hero-single-slider-item swiper-slide">
+                    <!-- Hero Slider Image -->
+                    <div class="hero-slider-bg">
+                        {{#each slider}}
+                        <img src="/banner-img/{{image}}" alt="">
+                        {{/each}}
+                    </div>
+                    <!-- Hero Slider Content -->
+                    <div class="hero-slider-wrapper">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-auto">
+                                    <div class="hero-slider-content">
+                                        {{!-- <h4 class="subtitle">New collection</h4> --}}
+                                        <h2 class="title" style="color:#fff ;">{{#each slider}} {{description}}
+                                            {{/each}}<br>Love </h2>
+                                        <a href="product-details-default.html"
+                                            class=" text-light  btn btn-lg btn-outline-light">shop now </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- End Hero Single Slider Item -->
+                <!-- Start Hero Single Slider Item -->
+                <div class="hero-single-slider-item swiper-slide">
+                    <!-- Hero Slider Image -->
+                    <div class="hero-slider-bg">
+                        {{#each slider}}
+                        <img src="/banner-img/{{image}}" alt="">
+                        {{/each}}
+                    </div>
+                    <!-- Hero Slider Content -->
+                    <div class="hero-slider-wrapper">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-auto">
+                                    <div class="hero-slider-content">
+                                        {{!-- <h4 class="subtitle">New collection</h4> --}}
+                                        <h2 class="title" style="color:#fff ;">{{#each slider}} {{description}}
+                                            {{/each}}<br>Love </h2>
+                                        <a href="product-details-default.html"
+                                            class="   text-light  btn btn-lg btn-outline-light">shop now </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- End Hero Single Slider Item -->
+            </div>
+
+            <!-- If we need pagination -->
+            <div class="swiper-pagination active-color-golden"></div>
+
+            <!-- If we need navigation buttons -->
+            <div class="swiper-button-prev d-none d-lg-block"></div>
+            <div class="swiper-button-next d-none d-lg-block"></div>
+        </div>
+    </div>
+    <!-- End Hero Slider Section-->
+
+    <!-- Start Service Section -->
+    <div class="service-promo-section section-top-gap-100">
+        <div class="service-wrapper">
+            <div class="container">
+                <div class="row">
+                    <!-- Start Service Promo Single Item -->
+                    {{#each service}}
+                    <div class="col-lg-3 col-sm-6 col-12">
+                        <div class="service-promo-single-item" data-aos="fade-up" data-aos-delay="0">
+                            <div class="image">
+                                <img src="/service-img/{{image}}" alt="">
+                            </div>
+                            <div class="content">
+                                <h6 class="title">{{title}}</h6>
+                                <p>{{description}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                    <!-- End Service Promo Single Item -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Service Section -->
+
+
+
+    {{!-- //NEw Arrivales --}}
+
+    <div class="product-default-slider-section section-top-gap-100 section-fluid">
+        <!-- Start Section Content Text Area -->
+        <div class="section-title-wrapper" data-aos="fade-up" data-aos-delay="0">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="section-content-gap">
+                            <div class="secton-content">
+                                <h3 class="section-title">THE NEW ARRIVALS</h3>
+                                <p>Preorder now to receive exclusive deals & gifts</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Start Section Content Text Area -->
+        <div class="product-wrapper" data-aos="fade-up" data-aos-delay="200">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="product-slider-default-2rows default-slider-nav-arrow">
+                            <!-- Slider main container -->
+                            <div class="swiper-container product-default-slider-4grid-2row">
+                                <!-- Additional required wrapper -->
+                                <div class="swiper-wrapper">
+                                    <!-- Start Product Default Single Item -->
+                                    {{#each products}}
+                                    <!-- Start Product Default Single Item -->
+                                    <div class="product-default-single-item product-color--golden swiper-slide">
+
+                                        <div class="image-box">
+                                            <a href="/product/{{this._id}}" class="image-link">
+                                                <img src="/uploads/{{this.image.[0]}}" alt="">
+                                                {{!-- <img src="assets/user/images/product/default/home-1/default-2.jpg"
+                                                    alt=""> --}}
+                                            </a>
+                                            <div class="tag">
+                                                <span>sale</span>
+                                            </div>
+                                            <div class="action-link ">
+                                                <div class="action-link-left">
+                                                    <button onclick="addTOCart('{{this._id}}')" style="color:#fff ;">Add
+                                                        to Cart</button>
+                                                </div>
+                                                <div class="action-link-right">
+                                                    <a onclick="addToWish('{{this._id}}')" data-bs-toggle="modal"><i
+                                                            class="icon-heart"></i></a>
+                                                    {{!-- <a href="wishlist.html"><i class="icon-heart"></i></a> --}}
+                                                    <a href="compare.html"><i class="icon-shuffle"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="content">
+                                            <div class="content-left">
+                                                <h6 class="title"><a
+                                                        href="product-details-default.html">{{this.name}}</a></h6>
+                                                <ul class="review-star">
+                                                    <li class="fill"><i class="ion-android-star"></i></li>
+                                                    <li class="fill"><i class="ion-android-star"></i></li>
+                                                    <li class="fill"><i class="ion-android-star"></i></li>
+                                                    <li class="fill"><i class="ion-android-star"></i></li>
+                                                    <li class="empty"><i class="ion-android-star"></i></li>
+                                                </ul>
+                                            </div>
+                                            <div class="content-right">
+                                                <span class="price">{{this.category.category}}</span><br>
+
+                                                <strike><span class="price">₹{{this.price}}</span></strike> <br>
+                                                <span class="price">₹{{this.priceAfterDiscount}}</span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    {{/each}}
+
+                                </div>
+                            </div>
+                            <!-- If we need navigation buttons -->
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-button-next"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{!--END //NEw Arrivales --}}
+
+
+    <!-- Start Banner Section -->
+    <div class="banner-section section-top-gap-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-8 offset-xl-2">
+                    <!-- Start Banner Single Item -->
+                    
+                    <div class="banner-single-item banner-style-3 banner-animation img-responsive" data-aos="fade-up"
+                        data-aos-delay="0">
+                        <div class="image">
+                            <img class="img-fluid" src="assets/images/banner/banner-style-3-img-1.jpg" alt="">
+                        </div>
+                        <div class="content">
+                            <h3 class="title">Modern Furniture
+                                Basic Collection</h3>
+                            <h5 class="sub-title">We design your home more beautiful</h5>
+                            <a href="product-details-default.html"
+                                class="btn btn-lg btn-outline-golden icon-space-left"><span
+                                    class="d-flex align-items-center">discover now <i
+                                        class="ion-ios-arrow-thin-right"></i></span></a>
+                        </div>
+                    </div>
+                    <!-- End Banner Single Item -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="product-default-slider-section section-top-gap-100 section-fluid section-inner-bg">
+        <!-- Start Section Content Text Area -->
+        <div class="section-title-wrapper" data-aos="fade-up" data-aos-delay="0">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="section-content-gap">
+                            <div class="secton-content">
+                                <h3 class="section-title">Trending Cakes</h3>
+                                {{!-- <p>Add our best sellers to your weekly lineup.</p> --}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Start Section Content Text Area -->
+        <div class="product-wrapper" data-aos="fade-up" data-aos-delay="0">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="product-slider-default-1row default-slider-nav-arrow">
+                            <!-- Slider main container -->
+                            <div class="swiper-container product-default-slider-4grid-1row">
+                                <!-- Additional required wrapper -->
+                                <div class="swiper-wrapper">
+                                    <!-- End Product Default Single Item -->
+                                    <!-- Start Product Default Single Item -->
+                                    {{#each trending}}
+                                    <div class="product-default-single-item product-color--golden swiper-slide">
+                                        <div class="image-box">
+                                            <a href="/product/{{this._id}}" class="image-link">
+                                                <img src="/uploads/{{this.image.[0]}}" alt="">
+                                                {{!-- <img src="assets/images/product/default/home-1/default-10.jpg"
+                                                    alt=""> --}}
+                                            </a>
+                                            <div class="action-link">
+                                                <div class="action-link-left">
+                                                    <a href="#" data-bs-toggle="modal"
+                                                        data-bs-target="#modalAddcart">Add to Cart</a>
+                                                </div>
+                                                <div class="action-link-right">
+                                                    <a href="#" data-bs-toggle="modal"
+                                                        data-bs-target="#modalQuickview"><i
+                                                            class="icon-magnifier"></i></a>
+                                                    <a href="wishlist.html"><i class="icon-heart"></i></a>
+                                                    <a href="compare.html"><i class="icon-shuffle"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="content">
+                                            <div class="content-left">
+                                                <h6 class="title"><a
+                                                        href="product-details-default.html">{{this.name}}</a></h6>
+                                                <ul class="review-star">
+                                                    <li class="fill"><i class="ion-android-star"></i></li>
+                                                    <li class="fill"><i class="ion-android-star"></i></li>
+                                                    <li class="fill"><i class="ion-android-star"></i></li>
+                                                    <li class="fill"><i class="ion-android-star"></i></li>
+                                                    <li class="empty"><i class="ion-android-star"></i></li>
+                                                </ul>
+                                            </div>
+                                            <div class="content-right">
+                                                <span class="price">₹{{this.price}}</span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    {{/each}}
+                                    <!-- End Product Default Single Item -->
+                                    <!-- Start Product Default Single Item -->
+
+                                    <!-- Start Product Default Single Item -->
+                                </div>
+                            </div>
+                            <!-- If we need navigation buttons -->
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-button-next"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Start Banner Section -->
+    <div class="banner-section">
+        <div class="banner-wrapper clearfix">
+            <!-- Start Banner Single Item -->
+            {{#each category}}
+            <div class="banner-single-item banner-style-4 banner-animation banner-color--golden float-left img-responsive"
+                data-aos="fade-up" data-aos-delay="0">
+                <div class="image">
+                    <img class="img-fluid" src="/category-img/{{this.image.[0]}}" alt="">
+                </div>
+                <a href="/product-list/{{this._id}}" class="content">
+                    <div class="inner">
+                        <h4 class="title">{{this.category}}</h4>
+                        <h6 class="sub-title">Discount {{this.categoryOffer}}%</h6>
+                    </div>
+                    <span class="round-btn"><i class="ion-ios-arrow-thin-right"></i></span>
+                </a>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+    <br>
+    <br>
+   
+    <div class="instagram-section section-top-gap-100 section-inner-bg">
+       
+    </div>
+    <!-- End Instagramr Section -->
+
+    <!-- Start Footer Section -->
+    <footer class="footer-section footer-bg">
+        <div class="footer-wrapper">
+            <!-- Start Footer Top -->
+            <div class="footer-top">
+                <div class="container">
+                    <div class="row mb-n6">
+                        <div class="col-lg-3 col-sm-6 mb-6">
+                            <!-- Start Footer Single Item -->
+                            <div class="footer-widget-single-item footer-widget-color--golden" data-aos="fade-up"
+                                data-aos-delay="0">
+                                <h5 class="title">INFORMATION</h5>
+                                <ul class="footer-nav">
+                                    <li><a href="#">Delivery Information</a></li>
+                                    <li><a href="#">Terms & Conditions</a></li>
+                                    <li><a href="contact-us.html">Contact</a></li>
+                                    <li><a href="#">Returns</a></li>
+                                </ul>
+                            </div>
+                            <!-- End Footer Single Item -->
+                        </div>
+                        <div class="col-lg-3 col-sm-6 mb-6">
+                            <!-- Start Footer Single Item -->
+                            <div class="footer-widget-single-item footer-widget-color--golden" data-aos="fade-up"
+                                data-aos-delay="200">
+                                <h5 class="title">MY ACCOUNT</h5>
+                                <ul class="footer-nav">
+                                    <li><a href="my-account.html">My account</a></li>
+                                    <li><a href="wishlist.html">Wishlist</a></li>
+                                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                                    <li><a href="faq.html">Frequently Questions</a></li>
+                                    <li><a href="#">Order History</a></li>
+                                </ul>
+                            </div>
+                            <!-- End Footer Single Item -->
+                        </div>
+                        <div class="col-lg-3 col-sm-6 mb-6">
+                            <!-- Start Footer Single Item -->
+                            <div class="footer-widget-single-item footer-widget-color--golden" data-aos="fade-up"
+                                data-aos-delay="400">
+                                <h5 class="title">CATEGORIES</h5>
+                                <ul class="footer-nav">
+                                    <li><a href="#">Decorative</a></li>
+                                    <li><a href="#">Kitchen utensils</a></li>
+                                    <li><a href="#">Chair & Bar stools</a></li>
+                                    <li><a href="#">Sofas and Armchairs</a></li>
+                                    <li><a href="#">Interior lighting</a></li>
+                                </ul>
+                            </div>
+                            <!-- End Footer Single Item -->
+                        </div>
+                        <div class="col-lg-3 col-sm-6 mb-6">
+                            <!-- Start Footer Single Item -->
+                            <div class="footer-widget-single-item footer-widget-color--golden" data-aos="fade-up"
+                                data-aos-delay="600">
+                                <h5 class="title">ABOUT US</h5>
+                                <div class="footer-about">
+                                    <p>We are a team of designers and developers that create high quality Magento,
+                                        Prestashop, Opencart.</p>
+
+                                    <address class="address">
+                                        <span>Address: Your address goes here.</span>
+                                        <span>Email: demo@example.com</span>
+                                    </address>
+                                </div>
+                            </div>
+                            <!-- End Footer Single Item -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Footer Top -->
+
+            <!-- Start Footer Center -->
+            <div class="footer-center">
+                <div class="container">
+                    <div class="row mb-n6">
+                        <div class="col-xl-3 col-lg-4 col-md-6 mb-6">
+                            <div class="footer-social" data-aos="fade-up" data-aos-delay="0">
+                                <h4 class="title">FOLLOW US</h4>
+                                <ul class="footer-social-link">
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-xl-7 col-lg-6 col-md-6 mb-6">
+                            <div class="footer-newsletter" data-aos="fade-up" data-aos-delay="200">
+                                <h4 class="title">DON'T MISS OUT ON THE LATEST</h4>
+                                <div class="form-newsletter">
+                                    <form action="#" method="post">
+                                        <div class="form-fild-newsletter-single-item input-color--golden">
+                                            <input type="email" placeholder="Your email address..." required>
+                                            <button type="submit">SUBSCRIBE!</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Start Footer Center -->
+
+            <!-- Start Footer Bottom -->
+        </div>
+    </footer>
+    <!-- End Footer Section -->
+
+    <!-- material-scrolltop button -->
+    <button class="material-scrolltop" type="button"></button>
+
+    <!-- Start Modal Add cart -->
+    <div class="modal fade" id="modalAddcart" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog  modal-dialog-centered modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col text-right">
+                                <button type="button" class="close modal-close" data-bs-dismiss="modal"
+                                    aria-label="Close">
+                                    <span aria-hidden="true"> <i class="fa fa-times"></i></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="modal-add-cart-product-img">
+                                            <img class="img-fluid"
+                                                src="/user/images/product/default/home-1/default-1.jpg" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="modal-add-cart-info"><i class="fa fa-check-square"></i>Added to
+                                            cart
+                                            successfully!</div>
+                                        <div class="modal-add-cart-product-cart-buttons">
+                                            <a href="cart.html">View Cart</a>
+                                            <a href="checkout.html">Checkout</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-5 modal-border">
+                                <ul class="modal-add-cart-product-shipping-info">
+                                    <li> <strong><i class="icon-shopping-cart"></i> There Are 5 Items In Your
+                                            Cart.</strong></li>
+                                    <li> <strong>TOTAL PRICE: </strong> <span>$187.00</span></li>
+                                    <li class="modal-continue-button"><a href="#" data-bs-dismiss="modal">CONTINUE
+                                            SHOPPING</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- End Modal Add cart -->
+
+    <!-- Start Modal Quickview cart -->
+    <div class="modal fade" id="modalQuickview" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog  modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col text-right">
+                                <button type="button" class="close modal-close" data-bs-dismiss="modal"
+                                    aria-label="Close">
+                                    <span aria-hidden="true"> <i class="fa fa-times"></i></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="product-details-gallery-area mb-7">
+                                    <!-- Start Large Image -->
+                                    <div class="product-large-image modal-product-image-large swiper-container">
+                                        <div class="swiper-wrapper">
+                                            <div class="product-image-large-image swiper-slide img-responsive">
+                                                <img src="/user/images/product/default/home-1/default-1.jpg" alt="">
+                                            </div>
+                                            <div class="product-image-large-image swiper-slide img-responsive">
+                                                <img src="/user/images/product/default/home-1/default-2.jpg" alt="">
+                                            </div>
+                                            <div class="product-image-large-image swiper-slide img-responsive">
+                                                <img src="/user/images/product/default/home-1/default-3.jpg" alt="">
+                                            </div>
+                                            <div class="product-image-large-image swiper-slide img-responsive">
+                                                <img src="/user/images/product/default/home-1/default-4.jpg" alt="">
+                                            </div>
+                                            <div class="product-image-large-image swiper-slide img-responsive">
+                                                <img src="/user/images/product/default/home-1/default-5.jpg" alt="">
+                                            </div>
+                                            <div class="product-image-large-image swiper-slide img-responsive">
+                                                <img src="/user/images/product/default/home-1/default-6.jpg" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End Large Image -->
+                                    <!-- Start Thumbnail Image -->
+                                    <div
+                                        class="product-image-thumb modal-product-image-thumb swiper-container pos-relative mt-5">
+                                        <div class="swiper-wrapper">
+                                            <div class="product-image-thumb-single swiper-slide">
+                                                <img class="img-fluid"
+                                                    src="/user/images/product/default/home-1/default-1.jpg" alt="">
+                                            </div>
+                                            <div class="product-image-thumb-single swiper-slide">
+                                                <img class="img-fluid"
+                                                    src="/user/images/product/default/home-1/default-2.jpg" alt="">
+                                            </div>
+                                            <div class="product-image-thumb-single swiper-slide">
+                                                <img class="img-fluid"
+                                                    src="/user/images/product/default/home-1/default-3.jpg" alt="">
+                                            </div>
+                                            <div class="product-image-thumb-single swiper-slide">
+                                                <img class="img-fluid"
+                                                    src="/user/images/product/default/home-1/default-4.jpg" alt="">
+                                            </div>
+                                            <div class="product-image-thumb-single swiper-slide">
+                                                <img class="img-fluid"
+                                                    src="/user/images/product/default/home-1/default-5.jpg" alt="">
+                                            </div>
+                                            <div class="product-image-thumb-single swiper-slide">
+                                                <img class="img-fluid"
+                                                    src="/user/images/product/default/home-1/default-6.jpg" alt="">
+                                            </div>
+                                        </div>
+                                        <!-- Add Arrows -->
+                                        <div class="gallery-thumb-arrow swiper-button-next"></div>
+                                        <div class="gallery-thumb-arrow swiper-button-prev"></div>
+                                    </div>
+                                    <!-- End Thumbnail Image -->
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="modal-product-details-content-area">
+                                    <!-- Start  Product Details Text Area-->
+                                    <div class="product-details-text">
+                                        <h4 class="title">Nonstick Dishwasher PFOA</h4>
+                                        <div class="price"><del>$70.00</del>$80.00</div>
+                                    </div> <!-- End  Product Details Text Area-->
+                                    <!-- Start Product Variable Area -->
+                                    <div class="product-details-variable">
+                                        <!-- Product Variable Single Item -->
+                                        <div class="variable-single-item">
+                                            <span>Color</span>
+                                            <div class="product-variable-color">
+                                                <label for="modal-product-color-red">
+                                                    <input name="modal-product-color" id="modal-product-color-red"
+                                                        class="color-select" type="radio" checked>
+                                                    <span class="product-color-red"></span>
+                                                </label>
+                                                <label for="modal-product-color-tomato">
+                                                    <input name="modal-product-color" id="modal-product-color-tomato"
+                                                        class="color-select" type="radio">
+                                                    <span class="product-color-tomato"></span>
+                                                </label>
+                                                <label for="modal-product-color-green">
+                                                    <input name="modal-product-color" id="modal-product-color-green"
+                                                        class="color-select" type="radio">
+                                                    <span class="product-color-green"></span>
+                                                </label>
+                                                <label for="modal-product-color-light-green">
+                                                    <input name="modal-product-color"
+                                                        id="modal-product-color-light-green" class="color-select"
+                                                        type="radio">
+                                                    <span class="product-color-light-green"></span>
+                                                </label>
+                                                <label for="modal-product-color-blue">
+                                                    <input name="modal-product-color" id="modal-product-color-blue"
+                                                        class="color-select" type="radio">
+                                                    <span class="product-color-blue"></span>
+                                                </label>
+                                                <label for="modal-product-color-light-blue">
+                                                    <input name="modal-product-color"
+                                                        id="modal-product-color-light-blue" class="color-select"
+                                                        type="radio">
+                                                    <span class="product-color-light-blue"></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <!-- Product Variable Single Item -->
+                                        <div class="d-flex align-items-center flex-wrap">
+                                            <div class="variable-single-item ">
+                                                <span>Quantity</span>
+                                                <div class="product-variable-quantity">
+                                                    <input min="1" max="100" value="1" type="number">
+                                                </div>
+                                            </div>
+
+                                            <div class="product-add-to-cart-btn">
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#modalAddcart">Add To
+                                                    Cart</a>
+                                            </div>
+                                        </div>
+                                    </div> <!-- End Product Variable Area -->
+                                    <div class="modal-product-about-text">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia iste
+                                            laborum ad impedit pariatur esse optio tempora sint ullam autem deleniti
+                                            nam
+                                            in quos qui nemo ipsum numquam, reiciendis maiores quidem aperiam, rerum
+                                            vel
+                                            recusandae</p>
+                                    </div>
+                                    <!-- Start  Product Details Social Area-->
+                                    <div class="modal-product-details-social">
+                                        <span class="title">SHARE THIS PRODUCT</span>
+                                        <ul>
+                                            <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
+                                            <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
+                                            <li><a href="#" class="pinterest"><i class="fa fa-pinterest"></i></a>
+                                            </li>
+                                            <li><a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
+                                            </li>
+                                            <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
+                                        </ul>
+
+                                    </div> <!-- End  Product Details Social Area-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- End Modal Quickview cart -->
+
+</body>
+
+
+
+</html>

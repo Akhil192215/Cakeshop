@@ -1,0 +1,165 @@
+<style>
+    body {
+        background-color: #FEF5EF;
+    }
+
+    .customer-login {
+        margin-top: 200px;
+    }
+
+    .account_form form {
+        border: 1px solid #24262b57;
+        padding: 23px 20px 29px;
+        border-radius: 5px;
+    }
+
+    .default-form-box input[type=email] {
+        border: 1px solid #24262b57;
+        border-radius: 3px;
+        background: 0 0;
+        height: 40px;
+        width: 100%;
+        padding: 0 20px;
+        color: #777
+    }
+
+
+    .default-form-box input[type=password] {
+        border: 1px solid #24262b57;
+        border-radius: 3px;
+        background: 0 0;
+        height: 40px;
+        width: 100%;
+        padding: 0 20px;
+        color: #777
+    }
+</style>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+<!-- MDB -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <ul class="col-  nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active" id="tab-login" data-mdb-toggle="pill" href="#pills-login" role="tab"
+                        aria-controls="pills-login" aria-selected="true">Login</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="tab-register" data-mdb-toggle="pill" href="#pills-register" role="tab"
+                        aria-controls="pills-register" aria-selected="false">OTP Login</a>
+                </li>
+            </ul>
+            <!-- Pills navs -->
+
+            <!-- Pills content -->
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
+                    <div class="customer-login">
+                        <div class="container">
+                            <div class="row">
+                                <!--login area start-->
+                                <div class="col-md-6 offset-md-3">
+                                    <div class="account_form" data-aos="fade-up" data-aos-delay="0">
+                                        <h3>login</h3>
+                                        <form action="/login" method="POST">
+
+                                            <p>{{message}}</p>
+                                            <div class="default-form-box">
+                                                <label>Email address <span>*</span></label>
+                                                <input type="email" value="akhilspoovathinkal@gmail.com" name='email' id="email" onkeyup="emailValidate()">
+                                                <span style="color: rgb(249, 184, 184) ;" id='emailError'></span>
+                                            </div>
+                                            <div class="default-form-box">
+                                                <label>Passwords <span>*</span></label>
+                                                <input type="password" value="2222" name='psw' id="psw" onkeyup="passwordValidate()">
+                                                <span style="color: rgb(249, 184, 184) ;" id='pswError'></span>
+                                            </div>
+                                            <div class="login_submit">
+                                                <button class="btn btn-md btn-black-default-hover mb-4"
+                                                    type="submit">login</button>
+                                                <a href="/signup">Create new account?</a>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
+                    <div class="customer-login">
+                        <div class="container">
+                            <div class="row">
+                                <!--login area start-->
+                                <div class="col-md-6 offset-md-3">
+                                    <div class="account_form" data-aos="fade-up" data-aos-delay="0">
+                                        <h3>Phone</h3>
+                                        <form action="/sendcode">
+                                            <div class="default-form-box">
+                                                <label>Enter your Registerd Phone nummber <span>*</span></label>
+                                                <input  type="number" name='phonenumber' id="email"
+                                                    onkeyup="emailValidate()">
+                                                <span style="color: rgb(249, 184, 184) ;" id='emailError'></span>
+                                            </div>
+                                            <input type="hidden" type="radio" type="hidden" id="age1" name="channel"
+                                                value="sms" checked>
+                                            <div class="login_submit">
+                                                <button class="btn btn-md btn-black-default-hover mb-4"
+                                                    type="submit">Send</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</body>
+<script>
+    var emailError = document.getElementById('emailError');
+    var passwordError = document.getElementById('pswError');
+
+
+    function emailValidate() {
+        var email = document.getElementById('email').value;
+        if (email.length == 0) {
+            emailError.innerHTML = "email is required";
+            return false;
+        }
+        if (!email.match(/^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/)) {
+            emailError.innerHTML = "email is  invalid";
+            return false;
+        }
+        emailError.innerHTML = "";
+        return true;
+    }
+    function passwordValidate() {
+        var password = document.getElementById('psw').value;
+        if (password.length <= 3) {
+            passwordError.innerHTML = "password is too short";
+            return false;
+        }
+        passwordError.innerHTML = "";
+        return true
+    }
+</script>
+<!-- Use the minified version files listed below for better performance and remove the files listed above -->
+<script src="/js/vendor/vendor.min.js"></script>
+<script src="/js/plugins/plugins.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.js"></script>
+<!-- Main JS -->
+<script src="/js/main.js"></script>
+
+
+
+<!-- Pills navs -->
+
+<!-- Pills content -->

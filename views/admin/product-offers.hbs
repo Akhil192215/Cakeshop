@@ -1,0 +1,145 @@
+<div style="margin-top:100px ;">
+    <div class="col-8 offset-3 ">
+    <div class="card recent-sales overflow-auto">
+
+
+        <div class="card-body">`
+            <h5 class="card-title mt-5"> Product Offer  <span>| </span></h5>
+
+            <table class="table table-borderless datatable">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Image</th>
+                        <th>Cake name</th>
+                        {{!-- <th>Category</th> --}}
+                        <th>Price</th>
+                        <th>Add</th>
+                        <th>View</th>
+                  
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each products}}
+                    <tr>
+                        <td>
+                            <p class="fw-bold mb-1">{{@index}}</p>
+                            <!-- <p class="text-muted mb-0">IT department</p> -->
+                        </td>
+                        <td>
+                            <img     src="/uploads/{{this.image.[0]}}" class="rounded-circle" alt=""
+                                style="width: 45px; height: 45px" />
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center">
+
+                                <div class="ms-3">
+                                    <p class="fw-bold mb-1">{{this.name}}</p>
+                                    <!-- <p class="text-muted mb-0">john.doe@gmail.com</p> -->
+                                </div>
+                            </div>
+                        </td>
+                        {{!-- <td>
+                            <p class="fw-bold mb-1">{{this.category}}</p>
+                            <!-- <p class="text-muted mb-0">IT department</p> -->
+                        </td> --}}
+                        <td>
+                            <p class="fw-bold mb-1">{{this.price}}</p>
+                            <!-- <p class="text-muted mb-0">IT department</p> -->
+                        </td>
+                     
+                        <td><button onclick="addoffer('{{this._id}}')" class="btn btn-outline-success"> <i class="icon-plus"></i></button>
+                        <td><button onclick="editoffer('{{this._id}}')" class="btn btn-outline-primary"> <i class="icon-eye"></i></button>
+                      
+                       
+                           
+                              
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+</div>
+</div>
+
+<script>
+   function addoffer(Id){
+
+(async () => {
+
+const { value: number } = await Swal.fire({
+  title: 'Input email address',
+  input: 'number',
+  inputLabel: 'Your email address',
+  inputPlaceholder: 'Enter your email address',
+  inputValue:'1'
+})
+
+  $.ajax({
+    type: 'POST',
+    url: 'product-offers',
+    data: {
+      offer: number,
+      proId: Id,
+    },
+    success:function(response){
+        console('hi')
+    }
+    })
+})()
+   }
+   function editoffer(id){
+    
+(async () => {
+
+
+
+  $.ajax({
+    type: 'GET',
+    url: 'view-offers/'+id,
+    success:function(response){
+          
+  Swal.fire(`Applied offer rate: ${response}%`)
+    }
+    })
+})()
+   }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

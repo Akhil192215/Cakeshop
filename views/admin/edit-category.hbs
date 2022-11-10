@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="row">
+        <section>
+            <form method="post" action="/admin/edit-Category/{{data._id}}" enctype="multipart/form-data">
+                <div class="default-form-box">
+                    <label> Edit Category <span>*</span></label>
+
+                    <input type="text" name='category' value="{{data.category}}">
+                </div>
+                <div class="default-form-box">
+                    <label> Edit Category-offer<span>*</span></label>
+
+                    <input type="text" name='categoryOffer' value="{{data.categoryOffer}}">
+                </div>
+                <div class="default-form-box">
+                    <label>IMG <span>*</span></label>
+
+                    <input type="file" name="image" multiple>
+                </div>
+                <div class="login_submit">
+                    <button class="btn btn-md btn-black-default-hover" type="submit">Update</button>
+                </div>
+            </form>
+        </section>
+    </div>

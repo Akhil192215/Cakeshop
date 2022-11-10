@@ -1,0 +1,63 @@
+<div style="margin-top:100px ;">
+    <div class="col-8 offset-3 ">
+        <div class="card recent-sales overflow-auto">
+            <div class="card-body">
+
+                <h5 class="card-title">Category <span>| </span></h5>
+
+                <table class="table table-borderless datatable">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Img</th>
+                            <th>Category</th>
+                            <th>Offer rate </th>
+                            <th>Action</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each category}}
+                        <tr>
+                            <td>
+                                <p class="fw-bold mb-1">{{@index}}</p>
+                            </td>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div class="ms-3">
+                                        <img src="/category-img/{{this.image.[0]}}" alt=""
+                                            style="width: 45px; height: 75px">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div class="ms-3">
+                                        <p class="fw-bold mb-1">{{this.category}}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div class="ms-3">
+                                        <p class="fw-bold mb-1">{{this.categoryOffer}}%</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><a href="/admin/delete-category/{{this._id}}" class="btn btn-danger"
+                                    onclick="return confirm('Are you sure?')"> <i class="fa fa-trash-o"></i></a></a>
+
+                                <a href="/admin/edit-category/{{this._id}}" class="btn btn-primary"> <i
+                                        class="icon-pencil"></i></a>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+</div>

