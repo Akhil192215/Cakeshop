@@ -1,3 +1,4 @@
+require('dotenv').config()
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -9,7 +10,7 @@ var session = require('express-session')
 var userRouter = require('./routes/user');
 var adminRouter = require('./routes/admin');
 var Handlebars = require('handlebars')
-var multer  = require('multer')
+var multer = require('multer')
 var app = express();
 
 // view engine setup
@@ -22,10 +23,10 @@ handlebars.handlebars.registerHelper('ifEquals', function (arg1, arg2, options) 
   return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
 });
 
-handlebars.handlebars.registerHelper('times', function(n, block) {
+handlebars.handlebars.registerHelper('times', function (n, block) {
   var accum = '';
-  for(var i = 1; i < n; ++i)
-      accum += block.fn(i);
+  for (var i = 1; i < n; ++i)
+    accum += block.fn(i);
   return accum;
 });
 

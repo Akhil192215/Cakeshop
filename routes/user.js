@@ -6,15 +6,16 @@ const { response } = require('../app');
 const paypal = require('paypal-rest-sdk');
 const collections = require('../config/collections');
 var db = require('../config/connection')
-require('dotenv').config()
 var collection = require('../config/collections')
 const { compareSync } = require('bcrypt');
 const session = require('express-session');
 var objectId = require('mongodb').ObjectId
 const client = require("twilio")(
- process.env.TWILO_API_KEY1,
+  process.env.TWILO_API_KEY1,
   process.env.TWILO_API_KEY2
 );
+
+console.log( process.env.TWILO_API_KEY1, process.env.TWILO_API_KEY2)
 
 paypal.configure({
   'mode': 'sandbox', //sandbox or live
@@ -148,7 +149,7 @@ router.get('/product/:id', verifyLogin, (req, res) => {
 
 router.get("/sendcode", (req, res) => {
   client.verify
-    .services(process.env.TWILO_SERVICE_ID) // Change service ID
+    .services('VA99ee67ecdb589f8383486c5fbaaacb45') // Change service ID
     .verifications.create({
       to: `+91${req.query.phonenumber}`,
       channel: req.query.channel === "call" ? "call" : "sms",
@@ -159,6 +160,7 @@ router.get("/sendcode", (req, res) => {
       res.render('user/verify', { phone, message })
 
     }).catch((error) => {
+      console.log(error )
     })
 });
 
@@ -166,7 +168,7 @@ let loggedIn = false
 
 router.get("/verify", (req, res) => {
   client.verify
-    .services(process.env.TWILO_SERVICE_ID) // Change service ID
+    .services('VA99ee67ecdb589f8383486c5fbaaacb45') // Change service ID
     .verificationChecks.create({
       to: `+91${req.query.phonenumber}`,
       code: req.query.code,
