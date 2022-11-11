@@ -247,6 +247,11 @@ router.get('/user-detailes', verifyLogin, (req, res) => {
         const pagination = totalcount / perPage + 1
         const currentPage = (req.query.page == null) ? 1 : req.query.page;
         userHelper.getOrders(req.session.userId,currentPage).then((orders) => {
+          orders = orders.map((i) => {
+            const [day, month, date, year] = i.date.toString().split(' ')
+            i.date = day + ' ' + month + ' ' + date + ' ' + year
+            return i
+          })
           res.render('user/user-detailes', { user, userObj, userData, cartCounter, wishlistCouner,pagination, orders, user: req.session.userId })
         })
       })
