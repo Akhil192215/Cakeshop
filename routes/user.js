@@ -157,7 +157,8 @@ router.get("/sendcode", (req, res) => {
     .then((data) => {
       let phone = req.query.phonenumber
       let message = String(phone).slice(-2)
-      res.render('user/verify', { phone, message })
+      let error = req.session.logginError
+      res.render('user/verify', { phone, message,error })
 
     }).catch((error) => {
       console.log(error )
@@ -176,14 +177,14 @@ router.get("/verify", (req, res) => {
     .then((data) => {
       if (data.status === "approved") {
         console.log('here');
+        req.session.logginError = false
         req.session.user = true
         console.log('here1');
         res.redirect('/')
       } else {
-        res.status(400).send({
-          message: "User is not Verified!!",
-          data,
-        });
+        console.log('Invalid OTP');
+       req.session.logginError = true
+       res.redirect('/verify')
       }
     });
 });

@@ -12,7 +12,7 @@
                         <th>Quantity</th>
                         <th>Price</th>
                         <th>Order Status</th>
-                        <th>Payment Status</th>
+                        {{!-- <th>Payment Status</th> --}}
                         <th>Option</th>
                     </tr>
                 </thead>
@@ -29,14 +29,14 @@
                         <td>{{this.quantity}}</td>
                         <td>{{this.product.price}}</td>
                         <td>{{this.status}}</td>
-                        <td>{{this.paymentStatus}}</td>
+                        {{!-- <td>{{this.paymentStatus}}</td> --}}
                         {{#ifEquals this.status 'Deliverd' }}
-                        <td>
+                        {{!-- <td>
                             <button id="{{this.product._id}}"
                                 onclick="returnOrder('{{this._id}}','{{this.product._id}}','{{this.product.name}}', this)"
                                 class="btn btn-success">Return</button>
 
-                        </td>
+                        </td> --}}
                         {{else}}
                         <td><button id="{{this.product._id}}" {{#ifEquals this.status 'Cancelled'
                                 }}disabled{{/ifEquals}}

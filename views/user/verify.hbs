@@ -1,6 +1,6 @@
 <style>
     body {
-        background: #f78e70;
+        background: #f6dad2;
     }
 
     #partitioned {
@@ -39,14 +39,18 @@
         <form action="/verify">
             <input type="hidden" name="phonenumber" value="{{phone}}"><br><br>
             <label for="Phone">OTP</label>
-            <h3>We have send OTP to your registerd phone number ending with +91********{{message}}</h3>
-            <div id="divOuter">
-                <div id="divInner">
-                    <input id="partitioned" type="number" name="code" maxlength="4" />
-                </div>
-            </div><br><br>
-            <button type="submit">verify</button>
-           <p onClick="document.location.reload(true)"> resend otp ?</p>
+            {{#if error}}
+            <p class="text-danger">Invalid Otp try again</p>
+            {{/if}}
+                <h3>We have send OTP to your registerd phone number ending with
+                    +91********{{message}}</h3>
+                <div id="divOuter">
+                    <div id="divInner">
+                        <input id="partitioned" type="number" name="code" maxlength="4" />
+                    </div>
+                </div><br><br>
+                <button type="submit">verify</button>
+                <p onClick="document.location.reload(true)"> resend otp ?</p>
         </form>
 
     </div>

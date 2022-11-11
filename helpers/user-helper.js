@@ -358,7 +358,7 @@ module.exports = {
                         products[i].paymentStatus = 'pending'
                     }
                 }
-                let status = order.paymentMethod == 'COD' ? 'placed' : 'processing'
+                let status = order.paymentMethod == 'COD' ? 'placed' : 'placed'
                 for (const i of products) {
                     i.status = status
                 }
