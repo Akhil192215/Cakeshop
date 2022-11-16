@@ -20,7 +20,7 @@
 
                         <tr>
                             <td>
-                                <img src="/uploads/{{this.product.image.[0]}}"  class="rounded-circle" alt=""
+                                <img src="/uploads/{{this.product.image.[0]}}" class="rounded-circle" alt=""
                                     style="width: 45px; height: 45px" />
                             </td>
                             <td>{{this.product.name}}
@@ -40,7 +40,7 @@
                                     <option value="Deliverd-{{this._id}}-{{this.product._id}}" {{#ifEquals
                                         this.status 'Deliverd' }} selected{{/ifEquals}}>Deliverd
                                     </option>
-                                    <option value="Deliverd-{{this._id}}-{{this.product._id}}" {{#ifEquals
+                                    <option value="Cancel-{{this._id}}-{{this.product._id}}" {{#ifEquals
                                         this.status 'Cancelled' }} selected{{/ifEquals}}>Cancelled
                                     </option>
                                 </select>
@@ -49,6 +49,7 @@
                             </td>
                             <td>{{this.quantity}}</td>
                             <td>{{this.product.price}}</td>
+                            <td><button >Accept Refund</button></td>
                         </tr>
                         {{/each}}
             </form>
@@ -76,5 +77,20 @@
             }
         })
     }
+</script>
 
+<script>
+    function refund(money) {
+        console.log(money)
+          $.ajax({
+            type: 'POST',
+            url: '/admin/refund',
+            data: {
+                money
+            },
+            success: (response) => {
+               alert('hi')
+            }
+        })
+    }
 </script>

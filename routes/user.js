@@ -15,7 +15,7 @@ const client = require("twilio")(
   process.env.TWILO_API_KEY2
 );
 
-console.log( process.env.TWILO_API_KEY1, process.env.TWILO_API_KEY2)
+console.log(process.env.TWILO_API_KEY1, process.env.TWILO_API_KEY2)
 
 paypal.configure({
   'mode': 'sandbox', //sandbox or live
@@ -158,10 +158,10 @@ router.get("/sendcode", (req, res) => {
       let phone = req.query.phonenumber
       let message = String(phone).slice(-2)
       let error = req.session.logginError
-      res.render('user/verify', { phone, message,error })
+      res.render('user/verify', { phone, message, error })
 
     }).catch((error) => {
-      console.log(error )
+      console.log(error)
     })
 });
 
@@ -183,8 +183,8 @@ router.get("/verify", (req, res) => {
         res.redirect('/')
       } else {
         console.log('Invalid OTP');
-       req.session.logginError = true
-       res.redirect('/verify')
+        req.session.logginError = true
+        res.redirect('/verify')
       }
     });
 });
@@ -241,18 +241,18 @@ router.post('/change-quantity', (req, res) => {
 router.get('/user-detailes', verifyLogin, (req, res) => {
   userHelper.getUserphone(req.session.userId).then((user) => {
     userHelper.getUserAddress(req.session.userId).then((userObj) => {
-      userHelper.getuserDetails(req.session.userId).then(async(userData) => {
+      userHelper.getuserDetails(req.session.userId).then(async (userData) => {
         const perPage = 10
-        const totalcount = await db.get().collection(collection.ORDER_COLLECTION).find({userId:objectId(req.session.userId)}).count()
+        const totalcount = await db.get().collection(collection.ORDER_COLLECTION).find({ userId: objectId(req.session.userId) }).count()
         const pagination = totalcount / perPage + 1
         const currentPage = (req.query.page == null) ? 1 : req.query.page;
-        userHelper.getOrders(req.session.userId,currentPage).then((orders) => {
+        userHelper.getOrders(req.session.userId, currentPage).then((orders) => {
           orders = orders.map((i) => {
             const [day, month, date, year] = i.date.toString().split(' ')
             i.date = day + ' ' + month + ' ' + date + ' ' + year
             return i
           })
-          res.render('user/user-detailes', { user, userObj, userData, cartCounter, wishlistCouner,pagination, orders, user: req.session.userId })
+          res.render('user/user-detailes', { user, userObj, userData, cartCounter, wishlistCouner, pagination, orders, user: req.session.userId })
         })
       })
 
@@ -311,8 +311,13 @@ router.post('/cart/check-out', verifyLogin, (req, res) => {
                 res.json({ razor: response })
               })
             } else if (req.body.paymentMethod === 'paypal') {
-              userHelper.paypal(totalAfterDiscount).then((response) => {
+              userHelper.paypal(totalAfterDiscount, response.insertedId, req.session.userId).then((response) => {
                 res.json(response)
+              })
+            }else if(req.body.paymentMethod === 'wallet'){
+              userHelper.wallet(totalAfterDiscount,req.session.userId).then((response)=>{
+                res.json({paymentMethod:'wallet'})
+
               })
             }
           })
@@ -322,9 +327,6 @@ router.post('/cart/check-out', verifyLogin, (req, res) => {
   }
 
 })
-
-
-
 
 router.get('/success', verifyLogin, (req, res) => {
   const payerId = req.query.PayerID;
@@ -345,8 +347,12 @@ router.get('/success', verifyLogin, (req, res) => {
       console.log(error.response);
       throw error;
     } else {
-      console.log(JSON.stringify(payment));
-      res.redirect('/order-status')
+    
+      const orderId =payment.transactions[0].description
+      userHelper.changePaymentStatus(orderId).then(() => {
+        res.redirect('/order-status')
+      })
+      
     }
   });
 });
@@ -426,9 +432,6 @@ router.post('/verify-payment', verifyLogin, (req, res) => {
   userHelper.verifyPayment(req.body).then(() => {
     userHelper.changePaymentStatus(req.body.order.receipt).then(() => {
       res.json({ status: true })
-    })
-    userHelper.paymentStatus(req.body.order.receipt).then(() => {
-
     })
   }).catch((error) => {
     res.json({ status: false })
@@ -520,10 +523,10 @@ router.get('/pswChange', (req, res) => {
   res.render('user/pswChange', { user: true })
 })
 
-router.post('/pswChange',(req,res)=>{
+router.post('/pswChange', (req, res) => {
   var currentpsw = req.body.currentpsw
   // userHelper.pswMatch(req.session.userId,currentpsw).then((response)=>{
-    res.send(response)
+  res.send(response)
   // })
 
 

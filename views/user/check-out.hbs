@@ -366,20 +366,27 @@
                     </div>
                     <div class="payment_method">
                         <div class="panel-default">
-                            <label class="checkbox-default" data-bs-toggle="collapse" data-bs-target="#methodCod">
+                            <label class="checkbox-default">
                                 <input type="radio" name="payment-method" checked="checked" value="COD" id="currencyCod"
                                     required>
                                 <span>Cash on Delivery</span>
                             </label>
                         </div>
                         <div class="panel-default">
-                            <label class="checkbox-default" data-bs-toggle="collapse" data-bs-target="#methodPaypal">
+                             <label class="checkbox-default">
+                                <input type="radio" name="payment-method" value="wallet" id="wallet"
+                                    required>
+                                <span>Use wallet</span>
+                            </label>
+                        </div>
+                        <div class="panel-default">
+                             <label class="checkbox-default">
                                 <input type="radio" name="payment-method" value="ONLINE" id="methodPaypal" required>
                                 <span>Online</span>
                             </label>
                         </div>
                         <div class="panel-default">
-                            <label class="checkbox-default" data-bs-toggle="collapse" data-bs-target="#methodPaypal">
+                             <label class="checkbox-default">
                                 <input type="radio" name="payment-method" value="paypal" id="methodPaypal" required>
                                 <span>Paypal</span>
                             </label>
@@ -794,6 +801,8 @@
                             location.href = '/order-status'
                         } else if (response.razor) {
                             razorpayPayment(response.razor)
+                        }else if(response.paymentMethod=='wallet'){
+                            location.href = '/order-status'
                         }
                     },
                 })

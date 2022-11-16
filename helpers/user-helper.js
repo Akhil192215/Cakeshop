@@ -358,7 +358,7 @@ module.exports = {
                         products[i].paymentStatus = 'pending'
                     }
                 }
-                let status = order.paymentMethod == 'COD' ? 'placed' : 'placed'
+                let status = order.paymentMethod == 'COD' || 'wallet' ? 'placed' : 'pending'
                 for (const i of products) {
                     i.status = status
                 }
@@ -542,6 +542,9 @@ module.exports = {
                     })
             }
 
+
+            
+
             resolve()
         })
 
@@ -577,7 +580,7 @@ module.exports = {
 
     },
     pswMatch: (userId, currentpsw) => {
-        console.log(userId,currentpsw)
+        console.log(userId, currentpsw)
         return new Promise(async (resolve, reject) => {
             const user = await db.get().collection(collection.USER_COLLECTION).find({ _id: objectId(userId) })
             if (user) {
@@ -590,7 +593,7 @@ module.exports = {
                 //         resolve(false)
                 //     }
                 // })
-            }else{
+            } else {
                 console.log('user not found')
             }
         })
@@ -628,8 +631,9 @@ module.exports = {
         })
     },
     changePaymentStatus: (orderId) => {
+        console.log('hloooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo', orderId)
         return new Promise((resolve, reject) => {
-            db.get().collection(collection.ORDER_COLLECTION).update({ _id: objectId(orderId) },
+            db.get().collection(collection.ORDER_COLLECTION).updateOne({ _id: objectId(orderId) },
                 {
                     $set: {
                         'status': 'placed'
@@ -638,11 +642,16 @@ module.exports = {
             ).then((data) => {
                 resolve()
             })
+            db.get().collection(collection.ORDER_COLLECTION).updateOne({ _id: objectId(orderId) },
+                {
+                    $set: { "orderdProducts.$[].status": 'Processing' }
+                }
+            )
         }).catch((err) => {
             console.log(err)
         })
     },
-    paypal: (amount) => {
+    paypal: (amount, orderId,) => {
         return new Promise((resolve, reject) => {
 
             const create_payment_json = {
@@ -651,8 +660,8 @@ module.exports = {
                     "payment_method": "paypal"
                 },
                 "redirect_urls": {
-                    "return_url": "https://shopcakes.shop/success",
-                    "cancel_url": "http://localhost:3000/cancel"
+                    "return_url": "http://localhost:3000/success",
+                    "cancel_url": "https://shopcakes.shop/chekout"
                 },
                 "transactions": [{
                     "item_list": {
@@ -668,7 +677,7 @@ module.exports = {
                         "currency": "USD",
                         "total": '25.00'
                     },
-                    "description": "Hat for the best team ever"
+                    "description": orderId
                 }]
             };
 
@@ -1146,6 +1155,15 @@ module.exports = {
                 resolve(trending)
             })
         })
+    },
+
+    wallet: (money, user) => {
+        return new Promise((resolve, reject) => {
+            db.get().collection(collection.WALLET_COLLECTION).updateOne({ userId: objectId(user) }, {
+                $inc: { 'totalBalance': -money }
+            }).then((response)=>{
+                resolve()
+            })
+        })
     }
 }
-

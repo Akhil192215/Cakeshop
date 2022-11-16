@@ -118,7 +118,7 @@ module.exports = {
     },
     adminLogin: (data) => {
         return new Promise(async (resolve, reject) => {
-            let validator = await db.get().collection(collection.ADMIN_COLLECTION).find({ email: data.email }).toArray()
+            let validator = await db.get().collection(collection?.ADMIN_COLLECTION).find({ email: data.email }).toArray()
             if (validator) {
                 if (validator[0].psw == data.psw) {
                     resolve(true)
@@ -142,8 +142,6 @@ module.exports = {
     updateStatus: (data) => {
         return new Promise(async (resolve, response) => {
             let order = await db.get().collection(collection.ORDER_COLLECTION).findOne({ _id: objectId(data.orderId) })
-
-
             for (const i of order.orderdProducts) {
                 if (i.item == data.productId) {
                     i.status = data.status
