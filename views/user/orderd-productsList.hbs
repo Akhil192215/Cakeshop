@@ -29,7 +29,7 @@
                         <td>{{this.quantity}}</td>
                         <td>{{this.product.price}}</td>
                         <td>{{this.status}}</td>
-                        {{!-- <td>{{this.paymentStatus}}</td> --}}
+
                         {{#ifEquals this.status 'Deliverd' }}
                         {{!-- <td>
                             <button id="{{this.product._id}}"
@@ -44,6 +44,7 @@
                                 class="btn btn-danger">Cancel</button>
                         </td>
                         {{/ifEquals}}
+                        <td>{{this.paymentStatus}}</td>
 
                     </tr>
                     {{/each}}
@@ -81,7 +82,7 @@
                     success: function (response) {
                         if (response) {
                             $(`#${product}`).attr("disabled", true);
-                               location.reload()
+                            location.reload()
                             swalWithBootstrapButtons.fire(
                                 'Success',
                                 'request send',
@@ -105,7 +106,7 @@
 </script>
 
 <script>
-    function returnOrder(order) {   
+    function returnOrder(order) {
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
                 confirmButton: 'btn btn-success',

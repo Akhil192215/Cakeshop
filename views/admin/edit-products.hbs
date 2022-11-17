@@ -107,26 +107,42 @@
                             <fieldset class="row mb-3">
                                 <legend class="col-form-label col-sm-2 pt-0">Radios</legend>
                                 <div class="col-sm-10">
+                                    {{#if products.avilability}}
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="avilability" id="gridRadios1"
-                                            value="0" checked>
-                                        <label class="form-check-label" for="gridRadios1">
+                                        <input class="form-check-input" type="radio" name="avilability" id="gridRadios2"
+                                            value="1" checked>
+                                        <label class="form-check-label" for="gridRadios2">
                                             Available
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="avilability" id="gridRadios2"
-                                            value="1">
-                                        <label class="form-check-label" for="gridRadios2">
+                                        <input class="form-check-input" type="radio" name="avilability" id="gridRadios1"
+                                            value="0">
+                                        <label class="form-check-label" for="gridRadios1">
                                             Unavailable
                                         </label>
                                     </div>
-                                </div>
+                                    {{else}}
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="avilability" id="gridRadios2"
+                                            value="1">
+                                        <label class="form-check-label" for="gridRadios2">
+                                            Available
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="avilability" id="gridRadios1"
+                                            value="0" checked>
+                                        <label class="form-check-label" for="gridRadios1">
+                                            Unavailable
+                                        </label>
+                                        {{/if}}
+                                    </div>
                             </fieldset>
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">Select</label>
                                 <div class="col-sm-10">
-                                    <select class="form-select" aria-label="Default select example"  name="category">
+                                    <select class="form-select" aria-label="Default select example" name="category">
                                         {{#each category}}
                                         <option value={{category}}>{{this.category}} </option>
                                         {{/each}}

@@ -216,6 +216,10 @@ module.exports = {
         return new Promise((resolve, reject) => {
             db.get().collection(collection.PRODUCT_COLLECTION).aggregate([
                 {
+                    $match: { avilability: 1 }
+                },
+                {
+
                     $lookup: {
                         from: collection.CATEGORY_COLLECTION,
                         localField: 'category',
@@ -295,6 +299,25 @@ module.exports = {
 
         })
 
+    },
+    addMoneyToWallet: (data, user) => {
+        data.money = parseInt(data.money)
+        return new Promise(async (resolve, reject) => {
+            let result = await db.get().collection(collection.WALLET_COLLECTION).updateOne({ userId: objectId(user) },
+                {
+                    $inc: { totalBalance: data.money }
+
+                }).then((response) => {
+                    db.get().collection(collection.ORDER_COLLECTION).updateOne({ _id: objectId(data.orderId), "orderdProducts.item": objectId(data.id) },
+                        { $set: { "orderdProducts.$.paymentStatus": "Refunded" } }
+                    ).then((response) => {
+                        console.log(result)
+                        resolve()
+                    })
+                })
+
+
+        })
     }
 
 }

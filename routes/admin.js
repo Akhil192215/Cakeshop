@@ -66,13 +66,13 @@ router.post('/add-category', upload1.array('image'), (req, res) => {
 })
 
 
-router.get('/view-products',async (req, res) => {
+router.get('/view-products', async (req, res) => {
   const perPage = 15
   const totalcount = await db.get().collection(collection.PRODUCT_COLLECTION).find().count()
   const pagination = totalcount / perPage + 1
   const currentPage = (req.query.page == null) ? 1 : req.query.page;
   productHelper.getAllProducts(currentPage).then((products,) => {
-    res.render('admin/view-products', { products, admin: true,pagination })
+    res.render('admin/view-products', { products, admin: true, pagination })
   })
 })
 
@@ -105,6 +105,7 @@ router.get('/edit-product/:id', (req, res) => {
   if (req.session.adminActive) {
     let productId = req.params.id
     productHelper.editProducts(productId).then((products) => {
+      console.log(products.avilability)
       productHelper.getCategory().then((category) => {
         res.render('admin/edit-products', { admin: true, products, category })
       })
@@ -125,7 +126,7 @@ router.post('/edit-product/:id', upload.array('image'), (req, res) => {
   productHelper.updateProduct(productId, req.body).then((response) => {
     if (req.files == null) {
       res.redirect('/admin')
-    }else{
+    } else {
       res.redirect('/admin/view-products')
     }
   })
@@ -268,7 +269,6 @@ router.get('/orders', async (req, res) => {
 router.get('/', (req, res) => {
   if (req.session.adminActive) {
     productHelper.orders().then((orders) => {
-
       orders = orders.map((i) => {
         const [day, month, date, year] = i.date.toString().split(' ')
         i.date = day + ' ' + month + ' ' + date + ' ' + year
@@ -294,6 +294,7 @@ router.get('/', (req, res) => {
 router.get('/order-received/:id', (req, res) => {
   let proId = req.params.id
   userHelper.getOrderProducts(proId).then((products) => {
+    console.log(products)
     res.render('admin/order-received', { products })
   })
 
@@ -437,9 +438,12 @@ router.post('/edit/remove-img', (req, res) => {
   res.send('hi')
 })
 
-router.post('refund',(req,res)=>{
+router.post('/refund', (req, res) => {
   console.log(req.body)
-  res.send('hi')
+  productHelper.addMoneyToWallet(req.body,req.session.userId).then((response) => {
+    res.send(true)
+  })
+
 })
 
 

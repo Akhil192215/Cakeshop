@@ -51,7 +51,7 @@ router.get('/', async function (req, res) {
   const cartCounter = await userHelper.getCartCounter(req.session.userId)
   userHelper.getWishListCounter(req.session.userId).then((wishlistCouner) => {
     userHelper.trendingProducts().then((trending) => {
-      productHelper.getAllProducts().then((products) => {
+      userHelper.getAllProducts().then((products) => {
         productHelper.getCategory().then((category) => {
           userHelper.getSlider().then((slider) => {
             userHelper.getServices().then((service) => {

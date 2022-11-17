@@ -354,9 +354,9 @@ module.exports = {
             let orderObj = {}
             db.get().collection(collection.ADDRRESS_COLLECTION).findOne().then((data) => {
                 if (order.paymentMethod != 'COD') {
-                    for (let i in products) {
-                        products[i].paymentStatus = 'pending'
-                    }
+                    // for (let i in products) {
+                    //     products[i].paymentStatus = 'pending'
+                    // }
                 }
                 let status = order.paymentMethod == 'COD' || 'wallet' ? 'placed' : 'pending'
                 for (const i of products) {
@@ -471,10 +471,14 @@ module.exports = {
                     $match: { _id: objectId(Id) }
                 },
                 {
+                    $project: { paymentMethod: 1, orderdProducts: 1 }
+                },
+                {
                     $unwind: '$orderdProducts'
                 },
                 {
                     $project: {
+                        paymentMethod: '$paymentMethod',
                         item: '$orderdProducts.item',
                         quantity: '$orderdProducts.quantity',
                         status: '$orderdProducts.status',
@@ -491,7 +495,7 @@ module.exports = {
                 },
                 {
                     $project: {
-                        item: 1, quantity: 1, orderId: 1, status: 1, paymentStatus: 1, product: { $arrayElemAt: ['$product', 0] }
+                        item: 1, paymentMethod: 1, quantity: 1, orderId: 1, status: 1, paymentStatus: 1, product: { $arrayElemAt: ['$product', 0] }
                     },
                 }
             ]).toArray().then((products) => {
@@ -528,8 +532,8 @@ module.exports = {
                 }
             }
 
-            db.get().collection(collection.ORDER_COLLECTION).updateOne({ _id: objectId(orderId) },
-                { $set: { "orderdProducts.$[].paymentStatus": 'Refunded' } })
+            // db.get().collection(collection.ORDER_COLLECTION).updateOne({ _id: objectId(orderId) },
+            //     { $set: { "orderdProducts.$[].paymentStatus": 'Refunded' } })
 
             let value = order.orderdProducts.every((i) =>
                 i.status === "Cancel"
@@ -543,7 +547,7 @@ module.exports = {
             }
 
 
-            
+
 
             resolve()
         })
@@ -660,7 +664,7 @@ module.exports = {
                     "payment_method": "paypal"
                 },
                 "redirect_urls": {
-                    "return_url": "http://localhost:3000/success",
+                    "return_url": "https://shopcakes.shop/success",
                     "cancel_url": "https://shopcakes.shop/chekout"
                 },
                 "transactions": [{
@@ -1161,9 +1165,17 @@ module.exports = {
         return new Promise((resolve, reject) => {
             db.get().collection(collection.WALLET_COLLECTION).updateOne({ userId: objectId(user) }, {
                 $inc: { 'totalBalance': -money }
-            }).then((response)=>{
+            }).then((response) => {
                 resolve()
             })
+        })
+    },
+    getAllProducts: (currentPage) => {
+        return new Promise(async (resolve, reject) => {
+            const perPage = 15
+            const skip = (currentPage - 1) * perPage;
+            let products = await db.get().collection(collection.PRODUCT_COLLECTION).find({avilability:1}).sort({ _id: -1 }).skip(skip).limit(perPage).toArray()
+            resolve(products)
         })
     }
 }

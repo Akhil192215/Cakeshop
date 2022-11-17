@@ -49,7 +49,28 @@
                             </td>
                             <td>{{this.quantity}}</td>
                             <td>{{this.product.price}}</td>
-                            <td><button >Accept Refund</button></td>
+                            {{#ifEquals this.paymentMethod 'COD'}}
+                            {{else}}
+                            <td>
+
+                                {{#ifEquals this.status 'Cancelled' }}
+                                {{#ifEquals this.paymentStatus 'Refunded'}}
+                                <a id="{{this.product._id}}" style="pointer-events: none; background-color: gray;" ;
+                                    onclick="refund('{{this.product.price}}','{{this.product._id}}','{{this._id}}')"
+                                    class="btn btn-success">Refund</a>
+
+                                {{else}}
+                                <a id="{{this.product._id}}" style="display:block" ;
+                                    onclick="refund('{{this.product.price}}','{{this.product._id}}','{{this._id}}')"
+                                    class="btn btn-success">Refund</a>
+                                {{/ifEquals}}
+                                {{/ifEquals}}
+                            </td>
+                            <td>
+                                {{/ifEquals}}
+                                <p id="{{this.product._id}}" class="text-success">{{#ifEquals this.paymentStatus
+                                    'Refunded'}} Refund send... {{/ifEquals}}</p>
+                            </td>
                         </tr>
                         {{/each}}
             </form>
@@ -80,16 +101,20 @@
 </script>
 
 <script>
-    function refund(money) {
+    function refund(money, id, orderId) {
+        console.log(id)
         console.log(money)
-          $.ajax({
+        $.ajax({
             type: 'POST',
             url: '/admin/refund',
             data: {
-                money
+                money, orderId, id
             },
             success: (response) => {
-               alert('hi')
+                document.getElementById(id).style.pointerEvents = 'none';
+                document.getElementById(id).style.backgroundColor = 'grey';
+                location.reload();
+
             }
         })
     }
