@@ -64,7 +64,7 @@ function addTOCart(proId) {
     type: 'GET',
     url: '/add-to-cart/' + proId,
     success: (response) => {
-      if (response) {
+      if (response.login) {
         let counter = $('#item-count').html()
         console.log('counter')
         console.log(counter)
@@ -90,6 +90,8 @@ function addTOCart(proId) {
           icon: 'success',
           title: 'Added to cart'
         })
+      }else{
+        location.href='/login'
       }
 
     }

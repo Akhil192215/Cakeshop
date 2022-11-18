@@ -220,8 +220,10 @@ router.get('/cart', (req, res) => {
 router.get('/add-to-cart/:id', (req, res) => {
   if (req.session.userId) {
     userHelper.addToCart(req.params.id, req.session.userId).then((response) => {
-      res.json(response)
+      res.json({login:true})
     })
+  }else{
+    res.json({login:false})
   }
 
 })
