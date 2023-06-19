@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 var express = require('express');
 var router = express.Router();
 var productHelper = require('../helpers/product-helper')
@@ -10,9 +11,6 @@ var fs = require('fs');
 const collections = require('../config/collections');
 var db = require('../config/connection')
 var collection = require('../config/collections')
-
-
-
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -38,8 +36,6 @@ router.post('/add-products', upload.array('image'), (req, res) => {
 const authourise = (req, res, next) =>
   req.session.adminActive ? next() : res.redirect('/admin/login')
 
-
-
 var storage1 = multer.diskStorage({
   destination: function (req, file, cb) {
     var dir = 'public/category-img'
@@ -50,8 +46,6 @@ var storage1 = multer.diskStorage({
   }
 })
 var upload1 = multer({ storage: storage1 })
-
-
 
 router.post('/add-category', upload1.array('image'), (req, res) => {
 
@@ -64,7 +58,6 @@ router.post('/add-category', upload1.array('image'), (req, res) => {
     res.redirect('/admin/add-category')
   })
 })
-
 
 router.get('/view-products', async (req, res) => {
   const perPage = 15
@@ -85,7 +78,6 @@ router.get('/add-products', (req, res) => {
     res.redirect('/admin/login')
   }
 })
-
 
 router.post('/add-products', (req, res) => {
   if (req.session.adminActive) {
@@ -141,9 +133,7 @@ router.get('/user-management', (req, res) => {
     res.redirect('/admin/login')
   }
 
-
 })
-
 
 router.get('/block-user/:id', (req, res) => {
   let userId = req.params.id
@@ -169,7 +159,6 @@ router.get('/add-category', (req, res) => {
 
 })
 
-
 router.get('/category-management', (req, res) => {
   if (req.session.adminActive) {
     productHelper.getCategory().then((category) => {
@@ -179,9 +168,7 @@ router.get('/category-management', (req, res) => {
     res.redirect('/admin/login')
   }
 
-
 })
-
 
 router.get('/delete-category/:id', (req, res) => {
   let categoryId = req.params.id
@@ -265,7 +252,6 @@ router.get('/orders', async (req, res) => {
 
 })
 
-
 router.get('/', (req, res) => {
   if (req.session.adminActive) {
     productHelper.orders().then((orders) => {
@@ -275,75 +261,73 @@ router.get('/', (req, res) => {
         return i
       })
       productHelper.salesDataDay().then((day) => {
-        const todaySale = day[day.length - 1].totaRevenue
+        const todaySale = day[day.length - 1].totaRevenue;
         productHelper.salesDataMonth().then((month) => {
-          const monthlySale = month[0].totaRevenue
+          const monthlySale = month[0].totaRevenue;
           productHelper.salesDataYear().then((year) => {
-            const yearlySale = year[0].totaRevenue
-            res.render('admin/home', { orders, todaySale, monthlySale, yearlySale, year, admin: true, day, month })
-          })
-        })
-      })
-
-    })
+            const yearlySale = year[0].totaRevenue;
+            // eslint-disable-next-line function-paren-newline
+            res.render('admin/home',
+              {
+                // eslint-disable-next-line object-curly-newline
+                orders, todaySale, monthlySale, yearlySale, year, admin: true, day, month },
+            );
+          });
+        });
+      });
+    });
   } else {
-    res.redirect('/admin')
+    res.redirect('/admin');
   }
-})
+});
 
 router.get('/order-received/:id', (req, res) => {
-  let proId = req.params.id
+  const proId = req.params.id;
   userHelper.getOrderProducts(proId).then((products) => {
-    console.log(products)
     res.render('admin/order-received', { products })
-  })
-
-})
+  });
+});
 
 router.post('/change-status', (req, res) => {
-  productHelper.updateStatus(req.body).then((response) => {
-    res.send('success')
-  })
-
-})
+  productHelper.updateStatus(req.body).then(() => {
+    res.send('success');
+  });
+});
 
 router.get('/multer', (req, res) => {
   res.render('admin/multer')
-})
+});
 
 router.get('/product-offers', (req, res) => {
   productHelper.getAllProducts().then((products) => {
-    res.render('admin/product-offers', { products, admin: true })
-  })
-})
+    res.render('admin/product-offers', { products, admin: true });
+  });
+});
 
 router.post('/product-offers', (req, res) => {
   productHelper.productOffer(req.body).then((response) => {
-    res.json(response)
-  })
-})
-
-
+    res.json(response);
+  });
+});
 
 router.get('/view-offers/:id', (req, res) => {
-  proId = req.params.id
+  // eslint-disable-next-line no-undef
+  proId = req.params.id;
+  // eslint-disable-next-line no-undef
   productHelper.viewOffer(proId).then((offer) => {
-    res.send(offer)
-  })
-})
-
+    res.send(offer);
+  });
+});
 
 router.get('/add-coupon', (req, res) => {
-  res.render('admin/add-coupon', { admin: true })
-})
+  res.render('admin/add-coupon', { admin: true });
+});
 
 router.post('/add-coupon', (req, res) => {
-  userHelper.addCoupon(req.body).then((response) => {
-    res.send(true)
-  })
-
-})
-
+  userHelper.addCoupon(req.body).then(() => {
+    res.send(true);
+  });
+});
 
 router.get('/coupon-management', (req, res) => {
   userHelper.getCoupon().then((coupon) => {
@@ -360,7 +344,6 @@ router.post('/delete-coupon', (req, res) => {
 router.get('/slider', (req, res) => {
   res.render('admin/homeSlider', { admin: true })
 })
-
 
 var storage1 = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -384,8 +367,6 @@ router.post('/slider', upload1.array('image'), (req, res) => {
   })
 })
 
-
-
 var storage1 = multer.diskStorage({
   destination: function (req, file, cb) {
     var dir = 'public/service-img'
@@ -408,8 +389,6 @@ router.post('/services', upload1.array('image'), (req, res) => {
   })
 })
 
-
-
 var storage1 = multer.diskStorage({
   destination: function (req, file, cb) {
     var dir = 'public/banner3-img'
@@ -420,7 +399,6 @@ var storage1 = multer.diskStorage({
   }
 })
 var upload1 = multer({ storage: storage1 })
-
 
 router.post('/Banner3', upload1.array('image'), (req, res) => {
   const files = req.files
@@ -445,7 +423,5 @@ router.post('/refund', (req, res) => {
   })
 
 })
-
-
 
 module.exports = router;
